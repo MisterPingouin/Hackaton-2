@@ -9,9 +9,6 @@
 {% block body %}
 
 {% if app.user %}
-{{ app.user.email }}
-<a href="{{ path('logout') }}">
-    Se déconnecter</a>
 <div class="col-xl-6">
 
     {{ form_start(form) }}
@@ -38,10 +35,5 @@
     <button id="choice-btn" class="d-none btn btn-primary">{{ button|default('Envoyer') }}</button>
     {{ form_end(form) }}
 </div>
-{% else %}
-<a href="{{ path('login') }}">
-    Se connecter</a>
-<a href="{{ path('register') }}">
-    S'inscrire</a>
 {% endif %}
 {% endblock %}

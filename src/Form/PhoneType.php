@@ -82,9 +82,9 @@ class PhoneType extends AbstractType
     private function getEtatChoices(): array
     {
         $choices = [
-            '0' => 'Déféctueux', '1' => 'Réparable',
-            '2' => 'Bloqué', '3' => 'Mauvais état', '4' => 'Etat convenable',
-            '5' => 'Bon état', '6' => 'Très bon état'
+            '0' => 'Déféctueux', '3' => 'Réparable',
+            '4' => 'Bloqué', '5' => 'Mauvais état', '7' => 'Etat convenable',
+            '8' => 'Bon état', '10' => 'Très bon état'
         ];
         $output = [];
         foreach ($choices as $k => $v) {

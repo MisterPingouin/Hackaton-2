@@ -30,6 +30,9 @@ class Phone
     #[ORM\Column(length: 255)]
     private ?string $etat = null;
 
+    #[ORM\Column(length: 7)]
+    private ?string $prix = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -91,6 +94,18 @@ class Phone
     public function setEtat(string $etat): self
     {
         $this->etat = $etat;
+
+        return $this;
+    }
+
+    public function getPrix(): ?string
+    {
+        return $this->prix;
+    }
+
+    public function setPrix(string $prix): self
+    {
+        $this->prix = $prix;
 
         return $this;
     }

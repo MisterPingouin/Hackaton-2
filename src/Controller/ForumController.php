@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\DiscussionRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -10,8 +11,11 @@ use Symfony\Component\Routing\Annotation\Route;
 class ForumController extends AbstractController
 {
     #[Route('/', name: 'index')]
-    public function index(): Response
+    public function index(DiscussionRepository $discussionRepository): Response
     {
-        return $this->render('forum/index.html.twig', []);
+        $discussion = $discussionRepository->findAll();
+        return $this->render('forum/index.html.twig', [
+            'discussions' => $discussionRepository->findAll(),
+        ]);
     }
 }

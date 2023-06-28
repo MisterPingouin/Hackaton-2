@@ -12,5 +12,20 @@
         </a>
     </div>
     <hr>
+    {% for discussion in discussions %}
+    <div class="card w-100 border-secondary">
+        <h2>{{discussion.title}}</h2>
+        <p>{{discussion.author.firstname}} {{discussion.author.lastname}}</p>
+        <p>
+            {% for category in discussion.category %}
+            {{category.name}} /
+            {% endfor %}
+        </p>
+        <a href="{{ path('discussion_show', {id:discussion.id}) }}">
+            <button class="btn btn-primary text-white">Voir discussion</button>
+        </a>
+    </div>
+    {% endfor %}
+
 </main>
 {% endblock %}
