@@ -8,6 +8,8 @@
 
     background: #00acb0;
 
+    color: white;
+
     /* sets the border of the element */
 
     border: 1px solid var(--zinc-200);
@@ -22,26 +24,12 @@
 
 
 }
-
-.bpw-chat-bubble {
-
+.bpw-floating-button {
     background-color: #00acb0;
-
-    color: #00acb0;
-}
-.bpw-from-bot
-
-{
-
-    background-color: #00acb0;
-
-    color: #00acb0;
 }
 
-.bpw-chat-bubble-content
-{
 
-    background: #00acb0;
-
-    color: #00acb0;
+.bpw-from-bot .bpw-chat-bubble .bpw-chat-bubble-content {
+    background-color: #00acb0;
+    color: #ffffff;
 }
