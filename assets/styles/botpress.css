@@ -104,6 +104,12 @@
     border-radius: 15px; 
 }
 
+
+.bpw-layout {
+    height: 35vh; /* Adjust this to control the height of the chatbot */
+    /* Other properties */
+}
+
 /* 
 .bpw-floating-button {
 
