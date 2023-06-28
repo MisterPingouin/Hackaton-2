@@ -31,11 +31,16 @@ $font-family-content: "Montserrat", sans-serif;
     color: $blue;
 }
 
-body {
+body,
+a {
     font-family: $font-family-content;
 }
 
 h1,
 h2 {
     font-family: $font-family-title;
+}
+
+#nav-logo {
+    width: 2rem;
 }

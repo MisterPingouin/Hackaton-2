@@ -1,0 +1,21 @@
+{# <img src="{{ asset('build/images/logo.png')}}" alt="logo" class="logo"> #}
+
+{# <a class="btn btn-primary m-0 shadow-lg text-white" href="{{ path('idea_new')}}">Ajouter une idée!</a> #}
+
+
+<nav class="navbar navbar-expand-lg bg-primary">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#"><img src="{{ asset('build/images/logo_noText.png')}}" alt="" id="nav-logo"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-link active" aria-current="page" href="{{ path('app_home')}}">Home</a>
+                <a class="nav-link" href="#">Features</a>
+                <a class="nav-link" href="#">Pricing</a>
+            </div>
+        </div>
+    </div>
+</nav>
