@@ -1,6 +1,8 @@
 <nav class="navbar navbar-expand-lg bg-primary shadow-lg sticky-top">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#"><img src="{{ asset('build/images/logo_noText.png')}}" alt="" id="nav-logo"></a>
+        <a class="navbar-brand" href="#">
+            <img src="{{ asset('build/images/logo.png')}}" alt="" class="navbar-brand-img">
+        </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
             aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -8,14 +10,13 @@
         <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
             <div class="navbar-nav">
                 <a class="nav-link text-white active" href="{{ path('app_home')}}">Home</a>
-                {% if app.user %}
+                <a class="nav-link text-white" href="{{ path('forum_index') }}">Forum</a>
+                                {% if app.user %}
                 <a href="{{ path('logout') }}" class="nav-link text-white"> Se déconnecter</a>
                 {% else %}
                 <a href="{{ path('login') }}" class="nav-link text-white"> Se connecter</a>
                 <a href="{{ path('register') }}" class="nav-link text-white"> S'inscrire</a>
                 {% endif %}
-                <a class="nav-link text-white" href="{{ path('forum_index') }}">Forum</a>
-                <a class="nav-link text-white" href="#">Calculatrice</a>
             </div>
         </div>
     </div>
