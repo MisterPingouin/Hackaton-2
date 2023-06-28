@@ -3,11 +3,5 @@
 {% block title %}Home{% endblock %}
 
 {% block body %}
-{% if app.user %}
-{{ app.user.email }}
-<a href="{{ path('logout') }}"> Se déconnecter</a>
-{% else %}
-<a href="{{ path('login') }}"> Se connecter</a>
-<a href="{{ path('register') }}"> S'inscrire</a>
-{% endif %}
+<h1 class="text-center my-3">Emmaüs Connect</h1>
 {% endblock %}

@@ -12,9 +12,15 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <a class="nav-link active" aria-current="page" href="{{ path('app_home')}}">Home</a>
-                <a class="nav-link" href="#">Features</a>
-                <a class="nav-link" href="#">Pricing</a>
+                <a class="nav-link active" href="{{ path('app_home')}}">Home</a>
+                {% if app.user %}
+                <a href="{{ path('logout') }}" class="nav-link"> Se déconnecter</a>
+                {% else %}
+                <a href="{{ path('login') }}" class="nav-link"> Se connecter</a>
+                <a href="{{ path('register') }}" class="nav-link"> S'inscrire</a>
+                {% endif %}
+                <a class="nav-link" href="{{ path('forum_index') }}">Forum</a>
+                <a class="nav-link" href="#">Calculatrice</a>
             </div>
         </div>
     </div>
