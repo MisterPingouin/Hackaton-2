@@ -3,5 +3,14 @@
 {% block title %}Hello ForumController!{% endblock %}
 
 {% block body %}
-<h1 class="text-center">Forum Page</h1>
+<main class="container">
+    <h1 class="text-center">Forum Page</h1>
+    <div class="d-flex justify-content-between">
+        <h2>Liste des discussion :</h2>
+        <a href="{{ path('discussion_new') }}">
+            <button class="btn btn-primary text-white">Créer une discussion</button>
+        </a>
+    </div>
+    <hr>
+</main>
 {% endblock %}

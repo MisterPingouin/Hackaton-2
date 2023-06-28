@@ -31,9 +31,10 @@ $font-family-content: "Montserrat", sans-serif;
     color: $blue;
 }
 
-body,
-a {
+body {
     font-family: $font-family-content;
+    margin: 0;
+    padding: 0;
 }
 
 h1,

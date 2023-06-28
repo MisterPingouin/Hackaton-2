@@ -1,26 +1,21 @@
-{# <img src="{{ asset('build/images/logo.png')}}" alt="logo" class="logo"> #}
-
-{# <a class="btn btn-primary m-0 shadow-lg text-white" href="{{ path('idea_new')}}">Ajouter une idée!</a> #}
-
-
-<nav class="navbar navbar-expand-lg bg-primary">
+<nav class="navbar navbar-expand-lg bg-primary shadow-lg sticky-top">
     <div class="container-fluid">
         <a class="navbar-brand" href="#"><img src="{{ asset('build/images/logo_noText.png')}}" alt="" id="nav-logo"></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
             aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <a class="nav-link active" href="{{ path('app_home')}}">Home</a>
+                <a class="nav-link text-white active" href="{{ path('app_home')}}">Home</a>
                 {% if app.user %}
-                <a href="{{ path('logout') }}" class="nav-link"> Se déconnecter</a>
+                <a href="{{ path('logout') }}" class="nav-link text-white"> Se déconnecter</a>
                 {% else %}
-                <a href="{{ path('login') }}" class="nav-link"> Se connecter</a>
-                <a href="{{ path('register') }}" class="nav-link"> S'inscrire</a>
+                <a href="{{ path('login') }}" class="nav-link text-white"> Se connecter</a>
+                <a href="{{ path('register') }}" class="nav-link text-white"> S'inscrire</a>
                 {% endif %}
-                <a class="nav-link" href="{{ path('forum_index') }}">Forum</a>
-                <a class="nav-link" href="#">Calculatrice</a>
+                <a class="nav-link text-white" href="{{ path('forum_index') }}">Forum</a>
+                <a class="nav-link text-white" href="#">Calculatrice</a>
             </div>
         </div>
     </div>
