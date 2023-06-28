@@ -37,53 +37,48 @@
                 <div class="col-md-6">
                     {{ form_start(form) }}
 
-                    <div id="choice-marque">
+                    <div id="choice-marque" class="mb-3">
                         {{ form_row(form.marque) }}
                     </div>
 
-                    <div id="choice-modele" class="d-none">
+                    <div id="choice-modele" class="d-none mb-3">
                         {{ form_row(form.modele) }}
                     </div>
 
-                    <div id="choice-ram" class="d-none">
+                    <div id="choice-ram" class="d-none mb-3">
                         {{ form_row(form.ram) }}
                     </div>
 
-                    <div id="choice-stockage" class="d-none">
+                    <div id="choice-stockage" class="d-none mb-3">
                         {{ form_row(form.stockage) }}
                     </div>
 
-                         <div id="choice-etat" class="d-none bs-tooltip-auto" data-bs-toggle="tooltip" data-bs-html="true" data-bs-placement="left"  data-bs-custom-class="custom-tooltip" title=" <u>Défectueux</u>: Le téléphone ne fonctionne pas. <br/>
-    <u>Réparable</u> : Le téléphone a des problèmes mais peut être réparé. <br/>
-   <u> Bloqué</u> : Le téléphone est bloqué par un opérateur <br/>
-   <u> Mauvais état</u> : Le téléphone a des dommages visibles <br/>
-   <u> État convenable</u> : Le téléphone a des signes d'usure mais fonctionne bien. <br/>
-    <u>Bon état</u> : Le téléphone est en bon état général avec peu de signes d'usure. <br/>
-   <u> Très bon état</u> : Le téléphone est comme neuf <br/>">
-    {{ form_row(form.etat) }}
-</div>
+                    <div id="choice-etat" class="d-none bs-tooltip-auto" data-bs-toggle="tooltip" data-bs-html="true" data-bs-placement="left"  data-bs-custom-class="custom-tooltip" title="<u>Défectueux</u>: Le téléphone ne fonctionne pas.<br/><u>Réparable</u>: Le téléphone a des problèmes mais peut être réparé.<br/><u>Bloqué</u>: Le téléphone est bloqué par un opérateur.<br/><u>Mauvais état</u>: Le téléphone a des dommages visibles.<br/><u>État convenable</u>: Le téléphone a des signes d'usure mais fonctionne bien.<br/><u>Bon état</u>: Le téléphone est en bon état général avec peu de signes d'usure.<br/><u>Très bon état</u>: Le téléphone est comme neuf.">
+                        {{ form_row(form.etat) }}
+                    </div>
 
-
-                    
                     <div class="text-center">
                         <button id="choice-btn" class="d-none btn btn-primary text-white">{{ button|default('Envoyer') }}</button>
                     </div>
 
                     {{ form_end(form) }}
+
                    {% if form.vars.submitted and price is defined %}
-    <p>Ce téléphone est estimé à {{ price }}€.</p>
-    <p>Modèle : {{ modele.name }}</p>
-    <p>Marque : {{ marque.name }}</p>
-    
-    {% if ficheTechnique is defined %}
-        <h3>Fiche Technique</h3>
-        <p>Taille de l'écran : {{ ficheTechnique.ScreenSize }}</p>
-        <p>Processeur : {{ ficheTechnique.processeur }}</p>
-        <p>Batterie : {{ ficheTechnique.batterie }}</p>
-        <p>Photo : {{ ficheTechnique.photo }}</p>
-        <p>Poids : {{ ficheTechnique.poids }}</p>
-    {% endif %}
+    <div class="mt-4 p-3 rounded shadow">
+        <p><strong>Modèle:</strong> {{ modele.name }}</p>
+        <p><strong>Marque:</strong> {{ marque.name }}</p> 
+        {% if ficheTechnique is defined %}
+            <h3 class="text-center mb-2">Fiche Technique</h3>
+            <p><strong>Taille de l'écran:</strong> {{ ficheTechnique.ScreenSize }}</p>
+            <p><strong>Processeur:</strong> {{ ficheTechnique.processeur }}</p>
+            <p><strong>Batterie:</strong> {{ ficheTechnique.batterie }}</p>
+            <p><strong>Photo:</strong> {{ ficheTechnique.photo }}</p>
+            <p><strong>Poids:</strong> {{ ficheTechnique.poids }}</p>
+        {% endif %}
+        <p><strong>Ce téléphone est estimé à:</strong> {{ price }}€</p>
+    </div>
 {% endif %}
+
                 </div>
             </div>
         </div>
