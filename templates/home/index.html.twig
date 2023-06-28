@@ -1,30 +1,33 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Home{% endblock %}
-
+    {% block javascripts %}
+        {{ parent() }}
+        {{ encore_entry_script_tags('showChoice') }}
+    {% endblock %}
 {% block body %}
     
 			<div class="col-xl-6">
 
 				{{ form_start(form) }}		
-       				<div>
+       				<div id= "choice-marque">
       				      {{ form_row(form.marque) }}
        				</div>
 
-        			<div>
+        			<div id= "choice-modele" class= "d-none">
           				{{ form_row(form.modele) }}
         			</div>
 
-					<div class="text-dark">
+					<div id="choice-ram" class="d-none">
 						{{form_row(form.ram)}}
 					</div>
 					
-					<div class="form-tag text-dark">
+					<div id = "choice-stockage" class="d-none">
 						{{ form_row(form.stockage) }}
 					</div>
 
 				
-				<button class="btn btn-light">{{ button|default('Envoyer') }}</button>
+				<button id="choice-btn" class="d-none btn btn-primary">{{ button|default('Envoyer') }}</button>
 				{{ form_end(form) }}
 			</div>
 {% endblock %}
