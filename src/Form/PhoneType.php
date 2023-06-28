@@ -29,11 +29,8 @@ class PhoneType extends AbstractType
             ])
             ->add('modele', EntityType::class, [
                 'class' => Modele::class,
-                'query_builder' => function (ModeleRepository $modeleRepository) {
-                    return $modeleRepository->createQueryBuilder('u')->orderBy('u.name', 'ASC');
-                },
-                'label' => 'Modele:',
                 'choice_label' => 'name',
+                'choices' => [],
                 'multiple' => false,
                 'required' => true
             ])
