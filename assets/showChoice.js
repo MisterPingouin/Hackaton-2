@@ -2,6 +2,7 @@ const marque = document.getElementById('choice-marque');
 const modele = document.getElementById('choice-modele');
 const ram = document.getElementById('choice-ram');
 const stockage = document.getElementById('choice-stockage');
+const etat = document.getElementById('choice-etat');
 const bouton = document.getElementById('choice-btn');
 
 marque.addEventListener('click', function (event) {
@@ -20,6 +21,11 @@ ram.addEventListener('click', function (event) {
         stockage.classList.remove('d-none');}
 })
 stockage.addEventListener('click', function (event) {
+    event.preventDefault();
+    if (etat.classList.contains('d-none')) {
+        etat.classList.remove('d-none');}
+})
+etat.addEventListener('click', function (event) {
     event.preventDefault();
     if (bouton.classList.contains('d-none')) {
         bouton.classList.remove('d-none');}
