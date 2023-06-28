@@ -10,6 +10,7 @@
 /public/bundles/
 /var/
 /vendor/
+/public/adminer.php
 ###< symfony/framework-bundle ###
 
 ###> symfony/webpack-encore-bundle ###

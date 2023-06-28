@@ -1,99 +1,41 @@
-@import "~bootstrap/dist/css/bootstrap.css";
-@import "~bootstrap/dist/css/bootstrap.min.css";
-.bpw-header-container {
+$primary: (#00acb0);
+$secondary: (#ffab1d);
+$danger: (#e53750);
 
-    /* sets the border radius of the element */
+$blue: (#272350);
+$gray: (#858585);
 
-    border-radius: var(--spacing-large);
+@import "~bootstrap/scss/bootstrap";
 
-    /* sets the background color of the element */
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Sarala&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Fira+Sans&display=swap");
 
-    background: #00acb0;
+$font-family-title: "Sarala", sans-serif;
+$font-family-subtitle: "Fira Sans", sans-serif;
+$font-family-content: "Montserrat", sans-serif;
 
-    color: white;
-
-    /* sets the border of the element */
-
-    border: 1px solid var(--zinc-200);
-
-    /* sets the border radius of the element (repeated declaration) */
-
-    border-radius: var(--spacing-medium);
-
-    /* sets the padding of the element */
-
-    padding: var(--spacing-large) var(--spacing-x-large);
-
-
+.bg-gray {
+    background-color: $gray;
 }
 
-.bpw-floating-button {
-
-    /* Aligns the button to the right side of the container */
-
-    float: right;
-
-    /* Sets the fill color of the button icon */
-
-    fill: rgb(0, 172, 176);
-
-    /* Changes the cursor to a pointer when hovering over the button */
-
-    cursor: pointer;
-
-    /* Removes the outline around the button when clicked */
-
-    outline: none;
-
-
-    /* Centers the icon inside the button element */
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-
-    /* Sets the z-index to ensure the button is on top of other elements */
-
-    z-index: 1;
-
-    /* Sets the width and height of the button */
-
-    width: 52px;
-
-    height: 52px;
-
-    /* Changes the cursor to a pointer when hovering over the button */
-
-    cursor: pointer;
-
-    /* Rounds the corners of the button */
-
-    border-radius: 50%;
-
-    /* Adds a shadow effect to the button */
-
-    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.4);
-
-    /* Clips any content that overflows the button */
-
-    overflow: hidden;
-
-
-    /* Removes padding and borders from the button */
-
-    padding: 0;
-
-    border: none;
-
-    background-clip: padding-box;
-
-
-    /* Adds a transition effect to the button when its size changes */
-
-    transition: width 1s, height 1s;
-
+.text-gray {
+    color: $gray;
 }
 
+.bg-blue {
+    background-color: $blue;
+}
+
+.text-blue {
+    color: $blue;
+}
+
+body {
+    font-family: $font-family-content;
+}
+
+h1,
+h2 {
+    font-family: $font-family-title;
+}
