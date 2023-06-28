@@ -13,8 +13,14 @@ import './bootstrap';
 
 // include bootstrap JS
 require('bootstrap');
+//boostrap css alert auto-close
+const alert = document.getElementById('alertMsg');
+//close the alert after 2 seconds (2000 milliseconds)
+setTimeout(() => {
+    alert.remove();
+}, 4000);
 
-
+//ajax on phone choice
 document.getElementById('phone_marque').addEventListener('click', function() {
     var marqueId = this.value;
 
