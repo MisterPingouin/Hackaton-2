@@ -1,2 +1,25 @@
+$primary: (#00acb0);
+$secondary: (#ffab1d);
+$blue: (#272350);
+$red: (#e53750);
+$danger: (#e53750);
+$gray: gray;
 @import "~bootstrap/dist/css/bootstrap.css";
 @import "~bootstrap/dist/css/bootstrap.min.css";
+
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Sarala&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Fira+Sans&display=swap");
+
+$font-family-title: "Sarala", sans-serif;
+$font-family-subtitle: "Fira Sans", sans-serif;
+$font-family-content: "Montserrat", sans-serif;
+
+body {
+    font-family: $font-family-content;
+}
+
+h1,
+h2 {
+    font-family: $font-family-title;
+}
