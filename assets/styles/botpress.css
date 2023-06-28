@@ -94,8 +94,19 @@
     transition: width 1s, height 1s;
 
 }
-
 .bpw-from-bot .bpw-chat-bubble .bpw-chat-bubble-content {
     background-color: #00acb0;
     color: #ffffff;
+    border-radius: 15px; 
 }
+
+.bpw-from-user .bpw-chat-bubble .bpw-chat-bubble-content {
+    border-radius: 15px; 
+}
+
+/* 
+.bpw-floating-button {
+
+    background-image: url(YOUR_URL);
+
+} */
