@@ -40,6 +40,8 @@ class ModeleFixtures extends Fixture implements DependentFixtureInterface
             $modele->setName($one);
             $modele->setMarque($this->getReference('marque_Apple'));
             $manager->persist($modele);
+            $this->addReference('modele_' . str_replace(' ', '_', $one), $modele);
+
         }
         foreach (self::SAMSUNG as $one) {
             $modele = new Modele();
@@ -66,4 +68,6 @@ class ModeleFixtures extends Fixture implements DependentFixtureInterface
     {
         return [MarqueFixtures::class];
     }
+
+    
 }
