@@ -33,9 +33,15 @@ $font-family-content: "Montserrat", sans-serif;
 
 body {
     font-family: $font-family-content;
+    margin: 0;
+    padding: 0;
 }
 
 h1,
 h2 {
     font-family: $font-family-title;
+}
+
+#nav-logo {
+    width: 2rem;
 }
