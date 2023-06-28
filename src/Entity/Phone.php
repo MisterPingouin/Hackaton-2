@@ -27,6 +27,9 @@ class Phone
     #[ORM\Column(length: 255)]
     private ?string $stockage = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $etat = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -76,6 +79,18 @@ class Phone
     public function setStockage(string $stockage): self
     {
         $this->stockage = $stockage;
+
+        return $this;
+    }
+
+    public function getEtat(): ?string
+    {
+        return $this->etat;
+    }
+
+    public function setEtat(string $etat): self
+    {
+        $this->etat = $etat;
 
         return $this;
     }

@@ -45,6 +45,10 @@ class PhoneType extends AbstractType
             ->add('stockage', ChoiceType::class, [
                 'choices' => $this->getStockageChoices(),
                 'label' => 'Stockage (Go):',
+            ])
+            ->add('etat', ChoiceType::class, [
+                'choices' => $this->getEtatChoices(),
+                'label' => 'Etat:',
             ]);
     }
 
@@ -68,6 +72,20 @@ class PhoneType extends AbstractType
     private function getRamChoices(): array
     {
         $choices = ['2' => '2', '4' => '4', '6' => '6', '8' => '8', '10' => '10', '12' => '12'];
+        $output = [];
+        foreach ($choices as $k => $v) {
+            $output[$v] = $k;
+        }
+        return $output;
+    }
+
+    private function getEtatChoices(): array
+    {
+        $choices = [
+            '0' => 'Déféctueux', '1' => 'Réparable',
+            '2' => 'Bloqué', '3' => 'Mauvais état', '4' => 'Etat convenable',
+            '5' => 'Bon état', '6' => 'Très bon état'
+        ];
         $output = [];
         foreach ($choices as $k => $v) {
             $output[$v] = $k;
