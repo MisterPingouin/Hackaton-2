@@ -50,3 +50,12 @@ h2 {
     width: 80px; 
     height: auto; 
 }
+
+.custom-tooltip {
+    --bs-tooltip-bg: var(--bs-primary);
+    padding: 20px;
+  }
+
+  .custom-tooltip .tooltip-arrow {
+    display: none;
+}

@@ -7,6 +7,8 @@
     {{ encore_entry_script_tags('showChoice') }}
     {% if app.user %}
         <script src="https://cdn.botpress.cloud/webchat/v0/inject.js"></script>
+        <script src="https://unpkg.com/@popperjs/core@2"></script>
+        <script src="https://unpkg.com/bootstrap@5.2/dist/js/bootstrap.bundle.min.js"></script>
         <script>
             document.addEventListener("DOMContentLoaded", function() {
                 window.botpressWebChat.init({
@@ -17,6 +19,11 @@
                     "botName": "Emmaus Connect Bot",
                     "avatarUrl": "https://emmaus-connect.org/logo.svg",
                     "stylesheet": "https://cdn.jsdelivr.net/gh/MisterPingouin/Hackaton-2@c5c9fd88704dfcfa6ea8967232615b1d38d68a22/assets/styles/botpress.css"
+                });
+
+                var tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+                var tooltipList = Array.from(tooltipTriggerList).map(function (tooltipTriggerEl) {
+                    return new bootstrap.Tooltip(tooltipTriggerEl);
                 });
             });
         </script>
@@ -46,10 +53,18 @@
                         {{ form_row(form.stockage) }}
                     </div>
 
-                    <div id="choice-etat" class="d-none">
-                        {{ form_row(form.etat) }}
-                    </div>
+                         <div id="choice-etat" class="d-none bs-tooltip-auto" data-bs-toggle="tooltip" data-bs-html="true" data-bs-placement="left"  data-bs-custom-class="custom-tooltip" title=" <u>Défectueux</u>: Le téléphone ne fonctionne pas. <br/>
+    <u>Réparable</u> : Le téléphone a des problèmes mais peut être réparé. <br/>
+   <u> Bloqué</u> : Le téléphone est bloqué par un opérateur <br/>
+   <u> Mauvais état</u> : Le téléphone a des dommages visibles <br/>
+   <u> État convenable</u> : Le téléphone a des signes d'usure mais fonctionne bien. <br/>
+    <u>Bon état</u> : Le téléphone est en bon état général avec peu de signes d'usure. <br/>
+   <u> Très bon état</u> : Le téléphone est comme neuf <br/>">
+    {{ form_row(form.etat) }}
+</div>
 
+
+                    
                     <div class="text-center">
                         <button id="choice-btn" class="d-none btn btn-primary text-white">{{ button|default('Envoyer') }}</button>
                     </div>

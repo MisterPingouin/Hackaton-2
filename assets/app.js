@@ -40,4 +40,10 @@ document.getElementById('phone_marque').addEventListener('click', function() {
         document.getElementById('phone_modele').innerHTML = '';
     }
 });
-
+document.addEventListener("DOMContentLoaded", function() {
+    // ...
+    var tooltipTriggerList = document.querySelectorAll('#choice-etat [data-bs-original-title]');
+    var tooltipList = Array.from(tooltipTriggerList).map(function(tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl);
+    });
+});
