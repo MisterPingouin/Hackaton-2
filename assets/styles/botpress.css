@@ -1,3 +1,30 @@
+.bpw-header-container {
+
+    /* sets the border radius of the element */
+
+    border-radius: var(--spacing-large);
+
+    /* sets the background color of the element */
+
+    background: #00acb0;
+
+    color: white;
+
+    /* sets the border of the element */
+
+    border: 1px solid var(--zinc-200);
+
+    /* sets the border radius of the element (repeated declaration) */
+
+    border-radius: var(--spacing-medium);
+
+    /* sets the padding of the element */
+
+    padding: var(--spacing-large) var(--spacing-x-large);
+
+
+}
+
 .bpw-floating-button {
 
     /* Aligns the button to the right side of the container */
@@ -68,4 +95,7 @@
 
 }
 
-
+.bpw-from-bot .bpw-chat-bubble .bpw-chat-bubble-content {
+    background-color: #00acb0;
+    color: #ffffff;
+}
