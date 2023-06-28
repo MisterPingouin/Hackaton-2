@@ -1,7 +1,47 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Home{% endblock %}
-
+{% block title %}Home
+{% endblock %}
+{% block javascripts %}
+{{ parent() }}
+{{ encore_entry_script_tags('showChoice') }}
+{% endblock %}
 {% block body %}
-<h1 class="text-center my-3">Emmaüs Connect</h1>
+
+{% if app.user %}
+{{ app.user.email }}
+<a href="{{ path('logout') }}">
+    Se déconnecter</a>
+<div class="col-xl-6">
+
+    {{ form_start(form) }}
+    <div id="choice-marque">
+        {{ form_row(form.marque) }}
+    </div>
+
+    <div id="choice-modele" class="d-none">
+        {{ form_row(form.modele) }}
+    </div>
+
+    <div id="choice-ram" class="d-none">
+        {{form_row(form.ram)}}
+    </div>
+
+    <div id="choice-stockage" class="d-none">
+        {{ form_row(form.stockage) }}
+    </div>
+
+    <div id="choice-etat" class="d-none">
+        {{form_row(form.etat)}}
+    </div>
+
+    <button id="choice-btn" class="d-none btn btn-primary">{{ button|default('Envoyer') }}</button>
+    {{ form_end(form) }}
+</div>
+{% else %}
+<a href="{{ path('login') }}">
+    Se connecter</a>
+<a href="{{ path('register') }}">
+    S'inscrire</a>
+{% endif %}
 {% endblock %}
