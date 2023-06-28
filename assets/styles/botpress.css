@@ -20,4 +20,10 @@
 
     padding: var(--spacing-large) var(--spacing-x-large);
 
+
+}
+
+.bpw-chat-bubble {
+
+    background-color: #00acb0;
 }
