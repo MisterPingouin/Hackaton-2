@@ -10,9 +10,9 @@ use Doctrine\Persistence\ObjectManager;
 class ModeleFixtures extends Fixture implements DependentFixtureInterface
 {
     public const APPLE = [
+        'IPhone 11',
         'IPhone 12',
         'IPhone 13',
-        'IPhone 14',
     ];
 
     public const SAMSUNG = [
@@ -48,18 +48,21 @@ class ModeleFixtures extends Fixture implements DependentFixtureInterface
             $modele->setName($one);
             $modele->setMarque($this->getReference('marque_Samsung'));
             $manager->persist($modele);
+            $this->addReference('modele_' . str_replace(' ', '_', $one), $modele);
         }
         foreach (self::LG as $one) {
             $modele = new Modele();
             $modele->setName($one);
             $modele->setMarque($this->getReference('marque_Lg'));
             $manager->persist($modele);
+            $this->addReference('modele_' . str_replace(' ', '_', $one), $modele);
         }
         foreach (self::WIKO as $one) {
             $modele = new Modele();
             $modele->setName($one);
             $modele->setMarque($this->getReference('marque_Wiko'));
             $manager->persist($modele);
+            $this->addReference('modele_' . str_replace(' ', '_', $one), $modele);
         }
         $manager->flush();
     }
