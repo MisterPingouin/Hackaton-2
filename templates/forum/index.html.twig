@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ForumController!{% endblock %}
+
+{% block body %}
+<main class="container">
+    <h1 class="text-center">Forum Page</h1>
+    <div class="d-flex justify-content-between">
+        <h2>Liste des discussion :</h2>
+        <a href="{{ path('discussion_new') }}">
+            <button class="btn btn-primary text-white">Créer une discussion</button>
+        </a>
+    </div>
+    <hr>
+    {% for discussion in discussions %}
+    <div class="card w-100 border-secondary">
+        <h2>{{discussion.title}}</h2>
+        <p>{{discussion.author.firstname}} {{discussion.author.lastname}}</p>
+        <p>
+            {% for category in discussion.category %}
+            {{category.name}} /
+            {% endfor %}
+        </p>
+        <a href="{{ path('discussion_show', {id:discussion.id}) }}">
+            <button class="btn btn-primary text-white">Voir discussion</button>
+        </a>
+    </div>
+    {% endfor %}
+
+</main>
+{% endblock %}
