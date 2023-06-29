@@ -9,7 +9,9 @@
 		{% if app.request.get('_route') in pages_with_search %}
 			<form class="d-flex" action="{{ path('app_phone_search') }}">
 				<input class="form-control me-2 rounded-pill" type="search" name="query" placeholder="Rechercher" aria-label="Search">
-				<button class="btn btn-outline-light rounded-pill" type="submit">Rechercher</button>
+				<button class="btn btn-outline-light rounded-pill align-middle" type="submit">
+					<i class="bi bi-search"></i>
+				</button>
 			</form>
 		{% endif %}
 		<button class="navbar-toggler border-1 border-light text-light rounded-pill" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -22,7 +24,12 @@
 
 			<div class="navbar-nav" id="nav-links">
 
-				<a class="bg-secondary {{ navlinkClass }}" href="{{ path('app_home')}}" aria-controls="home">Home</a>
+				{% if is_granted('ROLE_ADMIN') %}
+					<a class="nav-link btn-outline-secondary {{ navlinkClass }}" href="{{ path('user_index')}}" aria-controls="admin">Admin</a>
+				{% endif %}
+
+				{# <a class="bg-secondary {{ navlinkClass }}" href="{{ path('app_home')}}" aria-controls="home">Home</a> #}
+
 				{% if app.user %}
 					<a class="nav-link bg-secondary {{ navlinkClass }}" href="{{ path('app_add_phone')}}" aria-controls="add">Ajouter</a>
 					<a class="nav-link bg-secondary {{ navlinkClass }}" href="{{ path('app_phone_index')}}" aria-controls="stock">Stock</a>
