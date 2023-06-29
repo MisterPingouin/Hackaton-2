@@ -83,3 +83,17 @@ h2 {
     opacity: 0.8;
    
 }
+
+.slide-in-left {
+    animation: slideInLeft 0.5s ease-in-out forwards;
+  }
+  
+  @keyframes slideInLeft {
+    from {
+      transform: translateX(-100%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+  
