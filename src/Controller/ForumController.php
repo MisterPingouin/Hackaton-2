@@ -13,7 +13,6 @@ class ForumController extends AbstractController
     #[Route('/', name: 'index')]
     public function index(DiscussionRepository $discussionRepository): Response
     {
-        $discussion = $discussionRepository->findAll();
         return $this->render('forum/index.html.twig', [
             'discussions' => $discussionRepository->findAll(),
         ]);

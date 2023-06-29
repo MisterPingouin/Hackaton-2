@@ -26,6 +26,9 @@
         <div class="card-body">
             <p>{{ discussion.content|striptags|u.truncate(100, '...', true) |raw }}</p>
         </div>
+        <div class="card-footer">
+            <p>{{ discussion.publicationDate|date("d/m/Y H:i:s") }}</p>
+        </div>
     </div>
     <a href="{{ path('forum_index') }} " class="btn btn-secondary m-0 shadow-lg text-white">back to list</a>
 </main>

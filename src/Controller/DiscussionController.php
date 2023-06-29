@@ -6,6 +6,7 @@ use App\Entity\Discussion;
 use App\Entity\User;
 use App\Form\DiscussionType;
 use App\Repository\DiscussionRepository;
+use DateTimeImmutable;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -30,11 +31,15 @@ class DiscussionController extends AbstractController
         /** @var User $user */
         $user = $this->getUser();
         $discussion = new Discussion();
+        $date = new DateTimeImmutable();
+        $publicationDate = $date->setDate(intval(date('Y')), intval(date('m')), intval(date('d')));
+
         $form = $this->createForm(DiscussionType::class, $discussion);
 
         $form->handleRequest($request);
 
         $discussion->setAuthor($user);
+        $discussion->setPublicationDate($publicationDate);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $discussionRepository->save($discussion, true);
