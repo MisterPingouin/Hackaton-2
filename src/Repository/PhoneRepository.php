@@ -39,19 +39,17 @@ class PhoneRepository extends ServiceEntityRepository
         }
     }
 
-    /**
-     * @return Phone[]
-     */
-    public function findSearchQuery(string $query)
+
+    public function findSearchQuery(string $query): array
     {
         $qb = $this->createQueryBuilder('phone');
         $qb
+            ->leftJoin('phone.marque', 'marque')
+            ->leftJoin('phone.modele', 'modele')
             ->where(
-                $qb->expr()->andX(
-                    $qb->expr()->orX(
-                        $qb->expr()->like('phone.marque', ':query'),
-                        $qb->expr()->like('phone.modele', ':query'),
-                    )
+                $qb->expr()->orX(
+                    $qb->expr()->like('marque.name', ':query'),
+                    $qb->expr()->like('modele.name', ':query'),
                 )
             )
             ->setParameter('query', '%' . $query . '%');
@@ -61,28 +59,28 @@ class PhoneRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-//    /**
-//     * @return Phone[] Returns an array of Phone objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('p')
-//            ->andWhere('p.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('p.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    //    /**
+    //     * @return Phone[] Returns an array of Phone objects
+    //     */
+    //    public function findByExampleField($value): array
+    //    {
+    //        return $this->createQueryBuilder('p')
+    //            ->andWhere('p.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->orderBy('p.id', 'ASC')
+    //            ->setMaxResults(10)
+    //            ->getQuery()
+    //            ->getResult()
+    //        ;
+    //    }
 
-//    public function findOneBySomeField($value): ?Phone
-//    {
-//        return $this->createQueryBuilder('p')
-//            ->andWhere('p.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    //    public function findOneBySomeField($value): ?Phone
+    //    {
+    //        return $this->createQueryBuilder('p')
+    //            ->andWhere('p.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->getQuery()
+    //            ->getOneOrNullResult()
+    //        ;
+    //    }
 }
