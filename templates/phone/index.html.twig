@@ -124,7 +124,7 @@
 														<form action="{{ path('app_phone_sold', {'id': phone.id}) }}" name="user" method="GET" enctype="multipart/form-data" class="m-2">
 															<div class="mb-3 form-check">
 																<label class="form-check-label" for="isSold">Je confirme que ce
-																																		                                                        téléphone
+																																																			                                                        téléphone
 																	{{phone.marque.name}}
 																	{{phone.modele.name}}
 																	à bien été vendu</label>
@@ -184,6 +184,8 @@
 			<a class="btn btn-secondary rounded rounded-pill px-4 fw-bold text-light mx-auto" href="{{ path('app_home') }}">Ajouter un nouveau téléphone</a>
 		</section>
 
-
 	</main>
-{% endblock %}
+
+	<script src="https://unpkg.com/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+
+</main>{% endblock %}
