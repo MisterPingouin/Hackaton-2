@@ -1,82 +1,104 @@
 {% extends 'base.html.twig' %}
-{% block title %}Home{% endblock %}
+{% block title %}Home
+{% endblock %}
 {% block javascripts %}
-    {{ parent() }}
-    {{ encore_entry_script_tags('showChoice') }}
-    {% if app.user %}
-        <script src="https://cdn.botpress.cloud/webchat/v0/inject.js"></script>
-        <script src="https://unpkg.com/@popperjs/core@2"></script>
-        <script src="https://unpkg.com/bootstrap@5.2/dist/js/bootstrap.bundle.min.js"></script>
-        <script>
-            document.addEventListener("DOMContentLoaded", function() {
-                window.botpressWebChat.init({
-                    "botId": "bda36578-85a1-4fed-8f01-dc880a58e0c8",
-                    "hostUrl": "https://cdn.botpress.cloud/webchat/v0",
-                    "messagingUrl": "https://messaging.botpress.cloud",
-                    "clientId": "bda36578-85a1-4fed-8f01-dc880a58e0c8",
-                    "botName": "Emmaus Connect Bot",
-                    "avatarUrl": "https://emmaus-connect.org/logo.svg",
-                    "stylesheet": "https://cdn.jsdelivr.net/gh/MisterPingouin/Hackaton-2@c5c9fd88704dfcfa6ea8967232615b1d38d68a22/assets/styles/botpress.css"
-                });
-                var tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
-                var tooltipList = Array.from(tooltipTriggerList).map(function (tooltipTriggerEl) {
-                    return new bootstrap.Tooltip(tooltipTriggerEl);
-                });
-            });
-        </script>
-    {% endif %}
+	{{ parent() }}
+	{{ encore_entry_script_tags('showChoice') }}
+	{% if app.user %}
+		<script src="https://cdn.botpress.cloud/webchat/v0/inject.js"></script>
+		<script src="https://unpkg.com/@popperjs/core@2"></script>
+		<script src="https://unpkg.com/bootstrap@5.2/dist/js/bootstrap.bundle.min.js"></script>
+		<script>
+			document.addEventListener("DOMContentLoaded", function () {
+window.botpressWebChat.init({
+"botId": "bda36578-85a1-4fed-8f01-dc880a58e0c8",
+"hostUrl": "https://cdn.botpress.cloud/webchat/v0",
+"messagingUrl": "https://messaging.botpress.cloud",
+"clientId": "bda36578-85a1-4fed-8f01-dc880a58e0c8",
+"botName": "Emmaus Connect Bot",
+"avatarUrl": "https://emmaus-connect.org/logo.svg",
+"stylesheet": "https://cdn.jsdelivr.net/gh/MisterPingouin/Hackaton-2@c5c9fd88704dfcfa6ea8967232615b1d38d68a22/assets/styles/botpress.css"
+});
+var tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+var tooltipList = Array.from(tooltipTriggerList).map(function (tooltipTriggerEl) {
+return new bootstrap.Tooltip(tooltipTriggerEl);
+});
+});
+		</script>
+	{% endif %}
 {% endblock %}
 {% block body %}
-    {% if app.user %}
-        <div class="container mt-5">
-            <div class="row justify-content-center">
-                <div class="col-md-6">
-                    {{ form_start(form) }}
-                    <div id="choice-marque" class="mb-3 {{ form.marque.vars.attr.class ?? '' }}">
-                        {{ form_row(form.marque) }}
-                    </div>
-                    <div id="choice-modele" class="d-none mb-3 {{ form.marque.vars.attr.class ?? '' }}
- slide-in-left">
-                        {{ form_row(form.modele) }}
-                    </div>
-                    <div id="choice-ram" class="d-none mb-3 {{ form.marque.vars.attr.class ?? '' }}
- slide-in-left">
-                        {{ form_row(form.ram) }}
-                    </div>
-                    <div id="choice-stockage" class="d-none mb-3 {{ form.marque.vars.attr.class ?? '' }}
- slide-in-left">
-                        {{ form_row(form.stockage) }}
-                    </div>
-                    <div id="choice-etat" class="d-none bs-tooltip-auto slide-in-left" data-bs-toggle="tooltip" data-bs-html="true" data-bs-placement="left"  data-bs-custom-class="custom-tooltip" title="<u>Défectueux</u>: Le téléphone ne fonctionne pas.<br/><u>Réparable</u>: Le téléphone a des problèmes mais peut être réparé.<br/><u>Bloqué</u>: Le téléphone est bloqué par un opérateur.<br/><u>Mauvais état</u>: Le téléphone a des dommages visibles.<br/><u>État convenable</u>: Le téléphone a des signes d'usure mais fonctionne bien.<br/><u>Bon état</u>: Le téléphone est en bon état général avec peu de signes d'usure.<br/><u>Très bon état</u>: Le téléphone est comme neuf.">
-                        {{ form_row(form.etat) }}
-                    </div>
-                    <div class="text-center">
-                        <button id="choice-btn" class="d-none btn btn-primary text-white">{{ button|default('Envoyer') }}</button>
-                    </div>
-                    {{ form_end(form) }}
-                    {% if form.vars.submitted and price is defined %}
-                        <div class="mt-4 p-3 rounded shadow printable">
-                            <p><strong>Modèle:</strong> {{ modele.name }}</p>
-                            <p><strong>Marque:</strong> {{ marque.name }}</p>
-                            {% if ficheTechnique is defined %}
-                                <h3 class="text-center mb-2 pb-2">Fiche Technique</h3>
-                                <p><strong>Taille de l'écran:</strong> {{ ficheTechnique.ScreenSize }}</p>
-                                <p><strong>Processeur:</strong> {{ ficheTechnique.processeur }}</p>
-                                <p><strong>Batterie:</strong> {{ ficheTechnique.batterie }}</p>
-                                <p><strong>Photo:</strong> {{ ficheTechnique.photo }}</p>
-                                <p><strong>Poids:</strong> {{ ficheTechnique.poids }}</p>
-                            {% endif %}
-                            <p><strong>Ce téléphone est estimé à:</strong> {{ price }}€</p>
-                            <div onclick="window.print()" class="no-print text-end" style="cursor: pointer;">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-printer" viewBox="0 0 16 16">
-                                    <path d="M2.5 8a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z"/>
-                                    <path d="M5 1a2 2 0 0 0-2 2v2H2a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1v1a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-1h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1V3a2 2 0 0 0-2-2H5zM4 3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2H4V3zm1 5a2 2 0 0 0-2 2v1H2a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v-1a2 2 0 0 0-2-2H5zm7 2v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1z"/>
-                                </svg>
-                            </div>
-                        </div>
-                    {% endif %}
-                </div>
-            </div>
-        </div>
-    {% endif %}
+	<main class="container main-page" aria-label="add">
+		<section class="row mt-5">
+			<div class="col-2 d-flex justify-content-center align-items-center mx-auto">
+				{% for i in 1..5 %}
+					<img class="img-fluid" src="{{ asset('build/images/hand-phone-' ~ i ~ '.png')}}" alt="Des smartphones dans des mains">
+				{% endfor %}
+			</div>
+		</section>
+
+		{% set selectClass = 'bg-secondary text-light rounded rounded-pill fs-2 px-5 fw-bold' %}
+
+		<section class="row mt-5">
+			<div class="col-md-6 mx-auto">
+				{{ form_start(form) }}
+				<div id="choice-marque" class="mb-3 {{ form.marque.vars.attr.class ?? '' }}">
+					{{ form_row(form.marque, { 'attr': {'class': selectClass} }) }}
+				</div>
+				<div id="choice-modele" class="d-none mb-3 {{ form.marque.vars.attr.class ?? '' }}">
+					{{ form_row(form.modele, { 'attr': {'class': selectClass} }) }}
+				</div>
+				<div id="choice-ram" class="d-none mb-3 {{ form.marque.vars.attr.class ?? '' }}">
+					{{ form_row(form.ram, { 'attr': {'class': selectClass} }) }}
+				</div>
+				<div id="choice-stockage" class="d-none mb-3 {{ form.marque.vars.attr.class ?? '' }}">
+					{{ form_row(form.stockage, { 'attr': {'class': selectClass} }) }}
+				</div>
+				<div id="choice-etat" class="d-none bs-tooltip-auto" data-bs-toggle="tooltip" data-bs-html="true" data-bs-placement="left" data-bs-custom-class="custom-tooltip" title="<u>Défectueux</u>: Le téléphone ne fonctionne pas.<br/><u>Réparable</u>: Le téléphone a des problèmes mais peut être réparé.<br/><u>Bloqué</u>: Le téléphone est bloqué par un opérateur.<br/><u>Mauvais état</u>: Le téléphone a des dommages visibles.<br/><u>État convenable</u>: Le téléphone a des signes d'usure mais fonctionne bien.<br/><u>Bon état</u>: Le téléphone est en bon état général avec peu de signes d'usure.<br/><u>Très bon état</u>: Le téléphone est comme neuf.">
+					{{ form_row(form.etat, { 'attr': {'class': selectClass} }) }}
+				</div>
+				<div class="text-center">
+					<button id="choice-btn" class="d-none btn btn-primary rounded rounded-pill text-white fs-2 px-5 fw-bolder w-100">{{ button|default('Envoyer') }}</button>
+				</div>
+				{{ form_end(form) }}
+				{% if form.vars.submitted and price is defined %}
+					<div class="mt-4 p-3 rounded shadow printable">
+						<p>
+							<strong>Modèle:</strong>
+							{{ modele.name }}</p>
+						<p>
+							<strong>Marque:</strong>
+							{{ marque.name }}</p>
+						{% if ficheTechnique is defined %}
+							<h3 class="text-center mb-2 pb-2">Fiche Technique</h3>
+							<p>
+								<strong>Taille de l'écran:</strong>
+								{{ ficheTechnique.ScreenSize }}</p>
+							<p>
+								<strong>Processeur:</strong>
+								{{ ficheTechnique.processeur }}</p>
+							<p>
+								<strong>Batterie:</strong>
+								{{ ficheTechnique.batterie }}</p>
+							<p>
+								<strong>Photo:</strong>
+								{{ ficheTechnique.photo }}</p>
+							<p>
+								<strong>Poids:</strong>
+								{{ ficheTechnique.poids }}</p>
+						{% endif %}
+						<p>
+							<strong>Ce téléphone est estimé à:</strong>
+							{{ price }}€</p>
+						<div onclick="window.print()" class="no-print text-end" style="cursor: pointer;">
+							<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-printer" viewbox="0 0 16 16">
+								<path d="M2.5 8a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z"/>
+								<path d="M5 1a2 2 0 0 0-2 2v2H2a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1v1a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-1h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1V3a2 2 0 0 0-2-2H5zM4 3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2H4V3zm1 5a2 2 0 0 0-2 2v1H2a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v-1a2 2 0 0 0-2-2H5zm7 2v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1z"/>
+							</svg>
+						</div>
+					</div>
+				{% endif %}
+			</div>
+		</section>
+	</main>
 {% endblock %}
