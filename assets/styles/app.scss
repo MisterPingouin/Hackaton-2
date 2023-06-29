@@ -37,11 +37,67 @@ body {
     padding: 0;
 }
 
+p {
+    margin: 0;
+}
+
 h1,
 h2 {
     font-family: $font-family-title;
 }
 
+
 #nav-logo {
     width: 2rem;
 }
+
+.navbar-brand-img {
+    width: 80px; 
+    height: auto; 
+}
+
+.custom-tooltip {
+    --bs-tooltip-bg: var(--bs-primary);
+    padding: 20px;
+  }
+
+  .custom-tooltip .tooltip-arrow {
+    display: none;
+}
+
+
+@media print {
+    body * {
+        visibility: hidden;
+    }
+    .printable, .printable * {
+        visibility: visible;
+    }
+    .printable {
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+    .no-print {
+        display: none;
+    }
+}
+
+.navbar-nav .nav-link:hover {
+    opacity: 0.8;
+   
+}
+
+.slide-in-left {
+    animation: slideInLeft 0.5s ease-in-out forwards;
+  }
+  
+  @keyframes slideInLeft {
+    from {
+      transform: translateX(-100%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+  

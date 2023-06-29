@@ -2,8 +2,6 @@
 
 namespace App\Controller;
 
-use App\Repository\PhoneRepository;
-use App\Service\PriceManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,7 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class HomeController extends AbstractController
 {
     #[Route('/', name: 'app_home')]
-    public function index(Request $request, PhoneRepository $phoneRepository, PriceManager $priceManager): Response
+    public function index(Request $request): Response
     {
 
 
