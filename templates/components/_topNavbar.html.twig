@@ -22,7 +22,12 @@
 
 			<div class="navbar-nav" id="nav-links">
 
+				{% if is_granted('ROLE_ADMIN') %}
+					<a class="nav-link btn-outline-secondary {{ navlinkClass }}" href="{{ path('user_index')}}" aria-controls="admin">Admin</a>
+				{% endif %}
+
 				<a class="bg-secondary {{ navlinkClass }}" href="{{ path('app_home')}}" aria-controls="home">Home</a>
+
 				{% if app.user %}
 					<a class="nav-link bg-secondary {{ navlinkClass }}" href="{{ path('app_add_phone')}}" aria-controls="add">Ajouter</a>
 					<a class="nav-link bg-secondary {{ navlinkClass }}" href="{{ path('app_phone_index')}}" aria-controls="stock">Stock</a>

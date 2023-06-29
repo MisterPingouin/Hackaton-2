@@ -1,63 +1,129 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Liste des utilisateurs{% endblock %}
+{% block title %}Liste des utilisateurs
+{% endblock %}
 
 {% block body %}
-    <div class="container mt-5">
-        <h1>Liste des utilisateurs</h1>
 
-        <table class="table table-striped mt-3">
-            <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Email</th>
-                    <th>Prénom</th>
-                    <th>Nom</th>
-                    <th>Rôles</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for user in users %}
-                    <tr>
-                        <td>{{ user.id }}</td>
-                        <td>{{ user.email }}</td>
-                        <td>{{ user.firstname }}</td>
-                        <td>{{ user.lastname }}</td>
-                        <td>{{ user.roles|join(', ') }}</td>
-                        <td>
-                            <a href="{{ path('user_edit', {'id': user.id}) }}" class="btn btn-primary">Modifier</a>
-                            <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal{{ user.id }}">Supprimer</button>
+	<main class="main-page" aria-label="admin">
 
-                            <!-- Modal -->
-                            <div class="modal fade" id="deleteModal{{ user.id }}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="deleteModalLabel">Confirmation de suppression</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            Voulez-vous vraiment supprimer l'utilisateur {{ user.email }} ?
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-                                            <form method="post" action="{{ path('user_delete', {'id': user.id}) }}">
-                                                <input type="hidden" name="_method" value="DELETE">
-                                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}">
-                                                <button class="btn btn-danger">Supprimer</button>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
+		<section class="container mt-3 d-md-none d-block">
 
-    <script src="https://unpkg.com/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
-    <script src="https://unpkg.com/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+			{% for user in users %}
+
+				<article class="border border-primary border-2 rounded-4 my-1 py-2 px-2">
+					<div>
+						<span>
+							<strong>Id:</strong>
+						</span>
+						<span>
+							{{ user.id }}
+						</span>
+					</div>
+					<div>
+						<span>
+							<strong>Email:</strong>
+						</span>
+						<span>
+							{{ user.email }}
+						</span>
+					</div>
+					<div>
+						<span>
+							<strong>Prenom:</strong>
+						</span>
+						<span>
+							{{ user.firstname }}
+						</span>
+					</div>
+					<div>
+						<span>
+							<strong>Nom:</strong>
+						</span>
+						<span>
+							{{ user.lastname }}
+						</span>
+					</div>
+					<div>
+						<span>
+							<strong>Rôle:</strong>
+						</span>
+						<span>
+							{{ user.roles|join(', ') }}
+						</span>
+					</div>
+					<div>
+						<div class="row row-cols-auto justify-content-center">
+							<a href="{{ path('user_edit', {'id': user.id}) }}" class="btn btn-primary rounded rounded-pill fw-bold btn-sm text-light px-3 my-lg-auto my-1">Modifier</a>
+							<button class="btn btn-danger rounded rounded-pill fw-bold text-light px-3 btn-sm my-auto" data-bs-toggle="modal" data-bs-target="#deleteModal{{ user.id }}">Supprimer</button>
+						</div>
+					</div>
+				</article>
+
+			{% endfor %}
+
+		</section>
+
+		<section class="container mt-5 d-none d-md-block">
+
+			<div class="container mt-5">
+				<h1>Liste des utilisateurs</h1>
+
+				<table class="table table-striped mt-3">
+					<thead>
+						<tr>
+							<th>Id</th>
+							<th>Email</th>
+							<th>Prénom</th>
+							<th>Nom</th>
+							<th>Rôles</th>
+							<th>Actions</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for user in users %}
+							<tr>
+								<td>{{ user.id }}</td>
+								<td>{{ user.email }}</td>
+								<td>{{ user.firstname }}</td>
+								<td>{{ user.lastname }}</td>
+								<td>{{ user.roles|join(', ') }}</td>
+								<td>
+									<a href="{{ path('user_edit', {'id': user.id}) }}" class="btn btn-primary rounded rounded-pill fw-bold btn-sm text-light px-3 my-lg-auto my-1">Modifier</a>
+									<button class="btn btn-danger rounded rounded-pill fw-bold text-light px-3 btn-sm my-auto" data-bs-toggle="modal" data-bs-target="#deleteModal{{ user.id }}">Supprimer</button>
+
+									<!-- Modal -->
+									<div class="modal fade" id="deleteModal{{ user.id }}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+										<div class="modal-dialog" role="document">
+											<div class="modal-content">
+												<div class="modal-header">
+													<h5 class="modal-title" id="deleteModalLabel">Confirmation de suppression</h5>
+													<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+												</div>
+												<div class="modal-body">
+													Voulez-vous vraiment supprimer l'utilisateur
+													{{ user.email }}
+													?
+												</div>
+												<div class="modal-footer">
+													<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+													<form method="post" action="{{ path('user_delete', {'id': user.id}) }}">
+														<input type="hidden" name="_method" value="DELETE">
+														<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}">
+														<button class="btn btn-danger">Supprimer</button>
+													</form>
+												</div>
+											</div>
+										</div>
+									</div>
+								</td>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+		</section>
+	</main>
+
+	<script src="https://unpkg.com/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
 {% endblock %}
