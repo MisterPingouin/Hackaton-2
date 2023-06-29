@@ -38,6 +38,7 @@ class Phone
     #[ORM\ManyToOne(inversedBy: 'phone')]
     private ?Modele $modele = null;
 
+
     public function getId(): ?int
     {
         return $this->id;
