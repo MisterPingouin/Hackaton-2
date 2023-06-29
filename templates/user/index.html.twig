@@ -7,51 +7,32 @@
 
 	<main class="main-page" aria-label="admin">
 
+		<h1 class="container mt-3 fw-bold text-primary">Liste des utilisateurs</h1>
+
 		<section class="container mt-3 d-md-none d-block">
 
 			{% for user in users %}
 
-				<article class="border border-primary border-2 rounded-4 my-1 py-2 px-2">
-					<div>
-						<span>
-							<strong>Id:</strong>
-						</span>
-						<span>
-							{{ user.id }}
-						</span>
-					</div>
-					<div>
-						<span>
-							<strong>Email:</strong>
-						</span>
-						<span>
-							{{ user.email }}
-						</span>
-					</div>
-					<div>
-						<span>
-							<strong>Prenom:</strong>
-						</span>
-						<span>
-							{{ user.firstname }}
-						</span>
-					</div>
-					<div>
-						<span>
-							<strong>Nom:</strong>
-						</span>
-						<span>
-							{{ user.lastname }}
-						</span>
-					</div>
-					<div>
-						<span>
-							<strong>Rôle:</strong>
-						</span>
-						<span>
-							{{ user.roles|join(', ') }}
-						</span>
-					</div>
+				{% set userFields = [
+                    { 'title': 'ID:', 'data': user.id },
+                    { 'title': 'Email:', 'data': user.email },
+                    { 'title': 'Prenom:', 'data': user.firstname },
+                    { 'title': 'Nom:', 'data': user.lastname },
+                    { 'title': 'Rôle:', 'data': user.roles|join(', ') },
+                ] %}
+
+				<article class="border border-primary border-5 rounded-4 my-1 py-2 px-2">
+					{% for userField in userFields %}
+						<div>-
+							<span>
+								<strong>{{ userField['title'] }}</strong>
+							</span>
+							<span>
+								{{ userField['data'] }}
+							</span>
+						</div>
+					{% endfor %}
+
 					<div>
 						<div class="row row-cols-auto justify-content-center">
 							<a href="{{ path('user_edit', {'id': user.id}) }}" class="btn btn-primary rounded rounded-pill fw-bold btn-sm text-light px-3 my-lg-auto my-1">Modifier</a>
@@ -67,7 +48,6 @@
 		<section class="container mt-5 d-none d-md-block">
 
 			<div class="container mt-5">
-				<h1>Liste des utilisateurs</h1>
 
 				<table class="table table-striped mt-3">
 					<thead>

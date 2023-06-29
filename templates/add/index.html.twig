@@ -54,6 +54,7 @@ return new bootstrap.Tooltip(tooltipTriggerEl);
 				<div id="choice-stockage" class="d-none mb-3 {{ form.marque.vars.attr.class ?? '' }}">
 					{{ form_row(form.stockage, { 'attr': {'class': selectClass} }) }}
 				</div>
+				<div id="choice-etat-help"></div>
 				<div id="choice-etat" class="d-none bs-tooltip-auto" data-bs-toggle="tooltip" data-bs-html="true" data-bs-placement="left" data-bs-custom-class="custom-tooltip" title="<u>Défectueux</u>: Le téléphone ne fonctionne pas.<br/><u>Réparable</u>: Le téléphone a des problèmes mais peut être réparé.<br/><u>Bloqué</u>: Le téléphone est bloqué par un opérateur.<br/><u>Mauvais état</u>: Le téléphone a des dommages visibles.<br/><u>État convenable</u>: Le téléphone a des signes d'usure mais fonctionne bien.<br/><u>Bon état</u>: Le téléphone est en bon état général avec peu de signes d'usure.<br/><u>Très bon état</u>: Le téléphone est comme neuf.">
 					{{ form_row(form.etat, { 'attr': {'class': selectClass} }) }}
 				</div>

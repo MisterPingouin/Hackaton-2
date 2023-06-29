@@ -2,12 +2,17 @@
 
 {% block body %}
 	<main class="main-page" aria-label="login">
-		<div class="text-center text-blue mt-5">
-			<h1>Connectez-vous</h1>
-		</div>
-		<div class="d-flex justify-content-center">
-			<div class="col-9 col-md-6">
-				<div class="card shadow-lg p-2 mt-4">
+
+
+		<section class="d-flex justify-content-center align-items-center">
+
+			<section class="d-flex flex-column justify-content-center align-items-center">
+
+				<div class="text-primary mt-5">
+					<h1>Connectez-vous</h1>
+				</div>
+
+				<div class="p-2 mt-4">
 					{% if error %}
 						<div class="alert alert-danger text-center">
 							{{ error.messageKey|trans(error.messageData, 'security') }}
@@ -16,22 +21,30 @@
 
 					<form action="{{ path('login') }}" method="post">
 						<label class="form-label" for="username">Email:</label>
-						<input class="form-control" type="text" id="username" name="_username" value="{{ last_username }}">
+						<input class="form-control rounded-pill px-4" type="text" id="username" name="_username" value="{{ last_username }}">
 
 						<label class="form-label" for="password">Password:</label>
-						<input class="form-control" type="password" id="password" name="_password">
+						<input class="form-control rounded-pill px-4" type="password" id="password" name="_password">
 
 						<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
 						<div class="d-flex justify-content-center">
-							<button type="submit" class="btn btn-primary my-3 text-white">Connection</button>
+							<button type="submit" class="btn btn-secondary text-light fw-bold rounded-pill my-3 text-white">Connection</button>
 						</div>
 						<div class="d-flex justify-content-center">
 							<a href="{{ path('register') }}" class="nav-link link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Vous n'avez pas encore de compte ?</a>
 						</div>
 					</form>
 				</div>
-			</div>
-		</div>
+
+			</section>
+
+			<section class="d-md-block d-none d-flex justify-content-start align-items-center">
+				<img class="p-5 img-fluid" src="{{ asset('build/images/emmaus-hand-phone.png')}}" alt="illustration d'un smartphone dans une main">
+			</section>
+
+		</section>
+
+
 	</main>
 {% endblock %}
