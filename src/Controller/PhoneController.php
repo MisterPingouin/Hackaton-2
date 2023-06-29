@@ -12,6 +12,24 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/phone')]
 class PhoneController extends AbstractController
 {
+    #[Route('/search', name: 'app_phone_search', methods: ['GET'])]
+    public function searchResult(PhoneRepository $phoneRepository, Request $request): Response
+    {
+        //on récupère la valeur de la query
+        $query = $request->query->get('query');
+        if (strlen($query) < 2) {
+            $this->addFlash('error', 'Tapez au moins 2 caractères pour la recherche');
+            return $this->redirectToRoute('app_phone_index', [], Response::HTTP_SEE_OTHER);
+        }
+        // on récupère les produits qui correspondent à la recherche
+        $phones = $phoneRepository->findSearchQuery($query);
+
+        return $this->render('phone/searchresult.html.twig', [
+            'query' => $query,
+            'phones' => $phones,
+        ]);
+    }
+
     #[Route('/', name: 'app_phone_index', methods: ['GET'])]
     public function index(PhoneRepository $phoneRepository): Response
     {
@@ -36,25 +54,5 @@ class PhoneController extends AbstractController
         }
 
         return $this->redirectToRoute('app_phone_index', [], Response::HTTP_SEE_OTHER);
-    }
-
-    #[Route('/search', name: 'app_phone_search', methods: ['GET'])]
-    public function searchResult(PhoneRepository $phoneRepository, Request $request): Response
-    {
-        //on récupère la valeur de la query
-        $query = $request->query->get('query');
-
-        if (strlen($query) < 2) {
-            $this->addFlash('error', 'Tapez au moins 2 caractères pour la recherche');
-            return $this->redirectToRoute('app_phone_index', [], Response::HTTP_SEE_OTHER);
-        }
-        // on récupère les produits qui correspondent à la recherche
-        $phones = $phoneRepository->findSearchQuery(
-            $query
-        );
-
-        return $this->render('phone/searchresult.html.twig', [
-            'phones' => $phones,
-        ]);
     }
 }
