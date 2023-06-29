@@ -9,13 +9,15 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
+use DateTimeImmutable;
+use Symfony\Bundle\SecurityBundle\Security;
 
 #[IsGranted('ROLE_USER')]
 #[Route('/phone')]
 class PhoneController extends AbstractController
 {
     #[Route('/search', name: 'app_phone_search', methods: ['GET'])]
-    public function searchResult(PhoneRepository $phoneRepository, Request $request): Response
+    public function searchResult(PhoneRepository $phoneRepository, Request $request, Security $security): Response
     {
         //on récupère la valeur de la query
         $query = $request->query->get('query');
@@ -24,8 +26,11 @@ class PhoneController extends AbstractController
             return $this->redirectToRoute('app_phone_index', [], Response::HTTP_SEE_OTHER);
         }
         // on récupère les produits qui correspondent à la recherche
-        $phones = $phoneRepository->findSearchQuery($query);
-
+        if ($security->isGranted('ROLE_ADMIN')) {
+            $phones = $phoneRepository->findQueryOnAllPhones($query);
+        } else {
+            $phones = $phoneRepository->findQueryOnNotSoldPhones($query);
+        }
         return $this->render('phone/searchresult.html.twig', [
             'query' => $query,
             'phones' => $phones,
@@ -38,6 +43,18 @@ class PhoneController extends AbstractController
         return $this->render('phone/index.html.twig', [
             'phones' => $phoneRepository->findAll(),
         ]);
+    }
+
+    #[Route('/sold/{id}', name: 'app_phone_sold', methods: ['GET'])]
+    public function isSold(Phone $phone, PhoneRepository $phoneRepository, Request $request): Response
+    {
+        if ($request->get('isSold') == 'on') {
+            $phone->setIsSold(true);
+            $now = new DateTimeImmutable();
+            $phone->setExitDate($now);
+            $phoneRepository->save($phone, true);
+        }
+        return $this->redirectToRoute('app_phone_index', [], Response::HTTP_SEE_OTHER);
     }
 
     #[Route('/{id}', name: 'app_phone_show', methods: ['GET'])]
