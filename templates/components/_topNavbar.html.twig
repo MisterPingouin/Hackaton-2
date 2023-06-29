@@ -1,34 +1,40 @@
 {# liste des pages où la barre de recherche doit être affichée #}
 {% set pages_with_search = ['app_home', 'app_add_phone', 'app_phone_show', 'app_phone_search'] %}
 
-<nav class="navbar navbar-expand-lg bg-primary shadow-lg sticky-top">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="{{ path('app_home') }}">
-            <img src="{{ asset('build/images/logo.png')}}" alt="" class="navbar-brand-img">
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
-            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
-            <div class="navbar-nav">
-                {% if app.request.get('_route') in pages_with_search %}
-                <form class="d-flex" action="{{ path('app_phone_search') }}">
-                    <input class="form-control me-2" type="search" name="query" placeholder="Rechercher"
-                        aria-label="Search">
-                    <button class="btn btn-outline-light" type="submit">Rechercher</button>
-                </form>
-                {% endif %}
-                <a class="nav-link text-white active" href="{{ path('app_home')}}">Home</a>
-                {% if app.user %}
-                <a href="{{ path('logout') }}" class="nav-link text-white">Se déconnecter</a>
-                {% else %}
-                <a href="{{ path('login') }}" class="nav-link text-white">Se connecter</a>
-                <a href="{{ path('register') }}" class="nav-link text-white">S'inscrire</a>
-                {% endif %}
-                <a class="nav-link text-white" href="{{ path('app_add_phone')}}">Ajouter</a>
-                <a class="nav-link text-white" href="{{ path('app_phone_index')}}">Stock</a>
-            </div>
-        </div>
-    </div>
+<nav class="navbar navbar-dark navbar-expand-lg bg-primary shadow-lg sticky-top">
+	<div class="container-fluid">
+		<a class="navbar-brand" href="{{ path('app_home') }}">
+			<img src="{{ asset('build/images/logo.png')}}" alt="" class="navbar-brand-img">
+		</a>
+		{% if app.request.get('_route') in pages_with_search %}
+			<form class="d-flex" action="{{ path('app_phone_search') }}">
+				<input class="form-control me-2 rounded-pill" type="search" name="query" placeholder="Rechercher" aria-label="Search">
+				<button class="btn btn-outline-light rounded-pill" type="submit">Rechercher</button>
+			</form>
+		{% endif %}
+		<button class="navbar-toggler border-1 border-light text-light rounded-pill" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		{% set navlinkClass = 'nav-link btn px-4 rounded rounded-pill text-light mx-auto my-sm-1 mx-lg-1' %}
+
+		<div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
+
+			<div class="navbar-nav" id="nav-links">
+
+				<a class="bg-secondary {{ navlinkClass }}" href="{{ path('app_home')}}" aria-controls="home">Home</a>
+				{% if app.user %}
+					<a class="nav-link bg-secondary {{ navlinkClass }}" href="{{ path('app_add_phone')}}" aria-controls="add">Ajouter</a>
+					<a class="nav-link bg-secondary {{ navlinkClass }}" href="{{ path('app_phone_index')}}" aria-controls="stock">Stock</a>
+					<a href="{{ path('logout') }}" class="nav-link bg-danger text-light {{ navlinkClass }}">Se déconnecter</a>
+				{% else %}
+					<a href="{{ path('login') }}" class="bg-secondary {{ navlinkClass }}" aria-controls="login">Se connecter</a>
+				{% endif %}
+
+			</div>
+
+		</div>
+
+
+	</div>
 </nav>

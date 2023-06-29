@@ -23,32 +23,37 @@ class PhoneType extends AbstractType
                 'query_builder' => function (MarqueRepository $marqueRepository) {
                     return $marqueRepository->createQueryBuilder('u')->orderBy('u.name', 'ASC');
                 },
-                'label' => 'Modele:',
+                'label' => false,
                 'choice_label' => 'name',
                 'multiple' => false,
-                'required' => true
+                'required' => true,
+                'placeholder' => 'Marque',
             ])
             ->add('modele', EntityType::class, [
                 'class' => Modele::class,
                 'query_builder' => function (ModeleRepository $modeleRepository) {
                     return $modeleRepository->createQueryBuilder('u')->orderBy('u.name', 'ASC');
                 },
-                'label' => 'Modèle:',
+                'label' => false,
                 'choice_label' => 'name',
                 'multiple' => false,
-                'required' => true
+                'required' => true,
+                'placeholder' => 'Modèle',
             ])
             ->add('ram', ChoiceType::class, [
                 'choices' => $this->getRamChoices(),
-                'label' => 'RAM (Go):',
+                'label' => false,
+                'placeholder' => 'RAM (go)',
             ])
             ->add('stockage', ChoiceType::class, [
                 'choices' => $this->getStockageChoices(),
-                'label' => 'Stockage (Go):',
+                'label' => false,
+                'placeholder' => 'Stockage (go)',
             ])
             ->add('etat', ChoiceType::class, [
                 'choices' => $this->getEtatChoices(),
-                'label' => 'Etat:',
+                'label' => false,
+                'placeholder' => "Etat de l'appareil",
             ]);
     }
 
@@ -82,9 +87,13 @@ class PhoneType extends AbstractType
     private function getEtatChoices(): array
     {
         $choices = [
-            '0' => 'Déféctueux', '3' => 'Réparable',
-            '4' => 'Bloqué', '5' => 'Mauvais état', '7' => 'Etat convenable',
-            '8' => 'Bon état', '10' => 'Très bon état'
+            '0' => 'Déféctueux',
+            '3' => 'Réparable',
+            '4' => 'Bloqué',
+            '5' => 'Mauvais état',
+            '7' => 'Etat convenable',
+            '8' => 'Bon état',
+            '10' => 'Très bon état'
         ];
         $output = [];
         foreach ($choices as $k => $v) {
