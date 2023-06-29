@@ -14,7 +14,7 @@
                     <th>Prénom</th>
                     <th>Nom</th>
                     <th>Rôles</th>
-                    <th>Actions</th>
+                    <th class="ps-3">Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -26,8 +26,8 @@
                         <td>{{ user.lastname }}</td>
                         <td>{{ user.roles|join(', ') }}</td>
                         <td>
-                            <a href="{{ path('user_edit', {'id': user.id}) }}" class="btn btn-primary">Modifier</a>
-                            <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal{{ user.id }}">Supprimer</button>
+                            <a href="{{ path('user_edit', {'id': user.id}) }}" class="btn btn-primary rounded rounded-pill fw-bold text-light px-3 my-lg-auto my-1">Modifier</a>
+                            <button class="btn btn-danger rounded rounded-pill fw-bold text-light px-3 btn-sm my-auto ms-2" data-bs-toggle="modal" data-bs-target="#deleteModal{{ user.id }}">Supprimer</button>
 
                             <!-- Modal -->
                             <div class="modal fade" id="deleteModal{{ user.id }}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
@@ -41,12 +41,12 @@
                                             Voulez-vous vraiment supprimer l'utilisateur {{ user.email }} ?
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-                                            <form method="post" action="{{ path('user_delete', {'id': user.id}) }}">
-                                                <input type="hidden" name="_method" value="DELETE">
-                                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}">
-                                                <button class="btn btn-danger">Supprimer</button>
-                                            </form>
+                                            <button type="button" class="btn btn-secondary text-white" data-bs-dismiss="modal">Annuler</button>
+<form method="POST" action="{{ path('user_delete', {'id': user.id}) }}">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}">
+    <button class="btn btn-danger text-white">Supprimer</button>
+</form>
+
                                         </div>
                                     </div>
                                 </div>
