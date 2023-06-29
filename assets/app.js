@@ -11,6 +11,7 @@ import './styles/app.scss';
 // start the Stimulus application
 import './bootstrap';
 
+
 // include bootstrap JS
 require('bootstrap');
 //boostrap css alert auto-close

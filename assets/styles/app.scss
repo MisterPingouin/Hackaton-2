@@ -50,6 +50,13 @@ h2 {
     width: 2rem;
 }
 
+#nav-links {
+    .nav-link {
+        font-family: $font-family-title;
+        font-weight: bold;
+    }
+}
+
 .navbar-brand-img {
     width: 80px;
     height: auto;
@@ -84,17 +91,18 @@ h2 {
 
 .navbar-nav .nav-link:hover {
     opacity: 0.8;
+
 }
 
 .slide-in-left {
     animation: slideInLeft 0.5s ease-in-out forwards;
-}
+  }
 
-@keyframes slideInLeft {
+  @keyframes slideInLeft {
     from {
         transform: translateX(-100%);
     }
     to {
         transform: translateX(0);
     }
-}
+  }
