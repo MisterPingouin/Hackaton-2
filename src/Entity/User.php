@@ -3,8 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -36,18 +34,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 255)]
     private ?string $lastname = null;
-
-    #[ORM\OneToMany(mappedBy: 'Author', targetEntity: Discussion::class)]
-    private Collection $discussions;
-
-    #[ORM\OneToMany(mappedBy: 'user_id', targetEntity: Comment::class)]
-    private Collection $comments;
-
-    public function __construct()
-    {
-        $this->discussions = new ArrayCollection();
-        $this->comments = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
@@ -139,66 +125,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setLastname(string $lastname): self
     {
         $this->lastname = $lastname;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Discussion>
-     */
-    public function getDiscussions(): Collection
-    {
-        return $this->discussions;
-    }
-
-    public function addDiscussion(Discussion $discussion): self
-    {
-        if (!$this->discussions->contains($discussion)) {
-            $this->discussions->add($discussion);
-            $discussion->setAuthor($this);
-        }
-
-        return $this;
-    }
-
-    public function removeDiscussion(Discussion $discussion): self
-    {
-        if ($this->discussions->removeElement($discussion)) {
-            // set the owning side to null (unless already changed)
-            if ($discussion->getAuthor() === $this) {
-                $discussion->setAuthor(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Comment>
-     */
-    public function getComments(): Collection
-    {
-        return $this->comments;
-    }
-
-    public function addComment(Comment $comment): static
-    {
-        if (!$this->comments->contains($comment)) {
-            $this->comments->add($comment);
-            $comment->setUserId($this);
-        }
-
-        return $this;
-    }
-
-    public function removeComment(Comment $comment): static
-    {
-        if ($this->comments->removeElement($comment)) {
-            // set the owning side to null (unless already changed)
-            if ($comment->getUserId() === $this) {
-                $comment->setUserId(null);
-            }
-        }
 
         return $this;
     }
