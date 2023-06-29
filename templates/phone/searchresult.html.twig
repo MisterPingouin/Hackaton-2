@@ -2,6 +2,10 @@
 
 {% block title %}Search Results
 {% endblock %}
+{% block javascripts %}
+	{{ parent() }}
+	{{ encore_entry_script_tags('sortable') }}
+{% endblock %}
 
 {% block body %}
 	<div class="container-fluid">
@@ -36,6 +40,7 @@
 						<th style="cursor: pointer;">Stockage</th>
 						<th style="cursor: pointer;">Etat</th>
 						<th style="cursor: pointer;">Prix</th>
+						<th style="cursor: pointer;">Mis en vente le</th>
 						<th class="no-sort">actions</th>
 					</tr>
 				</thead>
@@ -45,8 +50,9 @@
 						<td>{{ phone.modele.name }}</td>
 						<td>{{phone.ram}}</td>
 						<td>{{ phone.stockage }}</td>
-						<td data-sort="">{{ phone.etat }}</td>
+						<td data-sort="">{{ phone.etat }}/10</td>
 						<td>{{ phone.prix }}</td>
+						<td>{{ phone.entryDate|date("d/m/Y") }}</td>
 						<td>
 							<a href="{{ path('app_phone_show', {'id': phone.id}) }}" class="btn btn-primary btn-sm">voir</a>
 						</td>

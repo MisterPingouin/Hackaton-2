@@ -40,7 +40,29 @@ class PhoneRepository extends ServiceEntityRepository
     }
 
 
-    public function findSearchQuery(string $query): array
+    public function findQueryOnNotSoldPhones(string $query): array
+    {
+        $qb = $this->createQueryBuilder('phone');
+        $qb
+            ->leftJoin('phone.marque', 'marque')
+            ->leftJoin('phone.modele', 'modele')
+            ->where(
+                $qb->expr()->andX(
+                    $qb->expr()->orX(
+                        $qb->expr()->like('marque.name', ':query'),
+                        $qb->expr()->like('modele.name', ':query'),
+                    ),
+                    $qb->expr()->eq('phone.isSold', 0)
+                )
+            )
+            ->setParameter('query', '%' . $query . '%');
+
+        return $qb
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findQueryOnAllPhones(string $query): array
     {
         $qb = $this->createQueryBuilder('phone');
         $qb
@@ -50,7 +72,7 @@ class PhoneRepository extends ServiceEntityRepository
                 $qb->expr()->orX(
                     $qb->expr()->like('marque.name', ':query'),
                     $qb->expr()->like('modele.name', ':query'),
-                )
+                ),
             )
             ->setParameter('query', '%' . $query . '%');
 
