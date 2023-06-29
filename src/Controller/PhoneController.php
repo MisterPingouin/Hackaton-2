@@ -8,7 +8,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
+#[IsGranted('ROLE_USER')]
 #[Route('/phone')]
 class PhoneController extends AbstractController
 {
@@ -39,10 +41,19 @@ class PhoneController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_phone_show', methods: ['GET'])]
-    public function show(Phone $phone): Response
+    public function show(Phone $phone, PhoneRepository $phoneRepository, Request $request): Response
     {
+        $modele = $phone->getModele();
+        $ficheTechnique = $modele->getFicheTechnique();
+
+        if ($request->get('isSold')) {
+            $phone->setIsSold(true);
+            $phoneRepository->save($phone, true);
+        }
+
         return $this->render('phone/show.html.twig', [
             'phone' => $phone,
+            'ficheTechnique' => $ficheTechnique,
         ]);
     }
 

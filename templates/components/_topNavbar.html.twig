@@ -10,14 +10,15 @@
             aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        {% if app.request.get('_route') in pages_with_search %}
-            <form class="d-flex" action="{{ path('app_phone_search') }}">
-                <input class="form-control me-2" type="search" name="query" placeholder="Rechercher" aria-label="Search">
-                <button class="btn btn-outline-light" type="submit">Rechercher</button>
-            </form>
-        {% endif %}
         <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
             <div class="navbar-nav">
+                {% if app.request.get('_route') in pages_with_search %}
+                <form class="d-flex" action="{{ path('app_phone_search') }}">
+                    <input class="form-control me-2" type="search" name="query" placeholder="Rechercher"
+                        aria-label="Search">
+                    <button class="btn btn-outline-light" type="submit">Rechercher</button>
+                </form>
+                {% endif %}
                 <a class="nav-link text-white active" href="{{ path('app_home')}}">Home</a>
                 {% if app.user %}
                 <a href="{{ path('logout') }}" class="nav-link text-white">Se déconnecter</a>
