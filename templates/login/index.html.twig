@@ -23,7 +23,7 @@
 						<label class="form-label" for="username">Email:</label>
 						<input class="form-control rounded-pill px-4" type="text" id="username" name="_username" value="{{ last_username }}">
 
-						<label class="form-label" for="password">Password:</label>
+						<label class="form-label mt-3" for="password">Password:</label>
 						<input class="form-control rounded-pill px-4" type="password" id="password" name="_password">
 
 						<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
