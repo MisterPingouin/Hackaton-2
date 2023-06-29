@@ -14,7 +14,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
+#[IsGranted('ROLE_USER')]
 class AddController extends AbstractController
 {
     #[Route('/add', name: 'app_add_phone')]
@@ -33,10 +35,11 @@ class AddController extends AbstractController
             $price = $priceManager->getPrice($phone);
             if ($price !== '0') {
                 $phone->setPrix($price);
+                $phone->setIsSold(false);
                 $now = new DateTimeImmutable();
-                $modele = $phone->getModele(); 
-                $marque = $modele->getMarque(); 
-                $ficheTechnique = $modele->getFicheTechnique(); 
+                $modele = $phone->getModele();
+                $marque = $modele->getMarque();
+                $ficheTechnique = $modele->getFicheTechnique();
                 $phone->setEntryDate($now);
                 $phoneRepository->save($phone, true);
                 $this->addFlash(
@@ -46,10 +49,11 @@ class AddController extends AbstractController
                 return $this->render('add/index.html.twig', [
                     'form' => $form,
                     'price' => $price,
-                    'modele' => $modele, 
-                    'marque' => $marque, 
-                    'ficheTechnique' => $ficheTechnique, 
-                ]);          }
+                    'modele' => $modele,
+                    'marque' => $marque,
+                    'ficheTechnique' => $ficheTechnique,
+                ]);
+            }
             $this->addFlash(
                 'danger',
                 'Ce téléphone est déféctueux, il ne peut pas être vendu et ne sera donc pas ajouté à la base'
