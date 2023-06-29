@@ -38,6 +38,9 @@ class Phone
     #[ORM\ManyToOne(inversedBy: 'phone')]
     private ?Modele $modele = null;
 
+    #[ORM\Column]
+    private ?bool $isSold = null;
+
 
     public function getId(): ?int
     {
@@ -136,6 +139,18 @@ class Phone
     public function setModele(?Modele $modele): self
     {
         $this->modele = $modele;
+
+        return $this;
+    }
+
+    public function isIsSold(): ?bool
+    {
+        return $this->isSold;
+    }
+
+    public function setIsSold(bool $isSold): static
+    {
+        $this->isSold = $isSold;
 
         return $this;
     }
