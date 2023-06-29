@@ -9,6 +9,13 @@
     <p><strong>Modèle:</strong> {{ phone.modele.name }}</p>
     <p><strong>Marque:</strong> {{ phone.marque.name }}</p>
     <p><strong>Etat:</strong> {{ phone.etat }}/10</p>
+    <p><strong>Status:</strong>
+        {% if phone.isSold is same as false %}
+        En vente
+        {% else %}
+        Vendue
+        {% endif %}
+    </p>
 
     <h3 class="text-center mb-2 pb-2">Fiche Technique</h3>
     <p><strong>Taille de l'écran:</strong> {{ ficheTechnique.ScreenSize }}</p>
@@ -31,4 +38,36 @@
 <div class="d-flex justify-content-center mt-4">
     <a class="btn btn-primary text-white" href="{{ path('app_phone_index') }}">Retour à la liste</a>
 </div>
+
+{% if phone.isSold is same as false %}
+<div class="d-flex justify-content-center mt-4">
+    <button type="button" class="btn btn-primary text-white" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+        Le téléphone à été vendu ?
+    </button>
+</div>
+
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">
+                    Téléphone Vendu
+                </h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form name="user" method="get" enctype="multipart/form-data" class="m-2">
+                    <div class="mb-3 form-check">
+                        <label class="form-check-label" for="isSold">Je confirme que ce téléphone
+                            {{phone.marque.name}} {{phone.modele.name}} à bien été vendu</label>
+                        <input type="checkbox" class="form-check-input" id="isSold" name="isSold">
+                    </div>
+                    <button type="submit" class="btn btn-primary text-white">Confirmer</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
 {% endblock %}
