@@ -21,15 +21,15 @@ class Modele
     #[ORM\ManyToOne(inversedBy: 'modeles')]
     private ?Marque $marque = null;
 
-    #[ORM\OneToMany(mappedBy: 'modele', targetEntity: Phone::class, orphanRemoval: true)]
-    private Collection $phones;
+    #[ORM\OneToMany(mappedBy: 'modele', targetEntity: Phone::class)]
+    private Collection $phone;
 
     #[ORM\OneToOne(mappedBy: 'modele', cascade: ['persist', 'remove'])]
     private ?FicheTechnique $ficheTechnique = null;
 
     public function __construct()
     {
-        $this->phones = new ArrayCollection();
+        $this->phone = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -64,15 +64,15 @@ class Modele
     /**
      * @return Collection<int, Phone>
      */
-    public function getPhones(): Collection
+    public function getPhone(): Collection
     {
-        return $this->phones;
+        return $this->phone;
     }
 
     public function addPhone(Phone $phone): self
     {
-        if (!$this->phones->contains($phone)) {
-            $this->phones->add($phone);
+        if (!$this->phone->contains($phone)) {
+            $this->phone->add($phone);
             $phone->setModele($this);
         }
 
@@ -81,7 +81,7 @@ class Modele
 
     public function removePhone(Phone $phone): self
     {
-        if ($this->phones->removeElement($phone)) {
+        if ($this->phone->removeElement($phone)) {
             // set the owning side to null (unless already changed)
             if ($phone->getModele() === $this) {
                 $phone->setModele(null);
