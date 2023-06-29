@@ -60,3 +60,26 @@ h2 {
   .custom-tooltip .tooltip-arrow {
     display: none;
 }
+
+
+@media print {
+    body * {
+        visibility: hidden;
+    }
+    .printable, .printable * {
+        visibility: visible;
+    }
+    .printable {
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+    .no-print {
+        display: none;
+    }
+}
+
+.navbar-nav .nav-link:hover {
+    opacity: 0.8;
+   
+}
