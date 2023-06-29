@@ -4,45 +4,47 @@
 {% endblock %}
 
 {% block body %}
-	<h1>Etat du stock:</h1>
+	<main class="main-page" aria-label="phone-index">
+		<h1>Etat du stock:</h1>
 
-	<table class="table">
-		<thead>
-			<tr>
-				<th>Marque</th>
-				<th>Modèle</th>
-				<th>Ram</th>
-				<th>Stockage</th>
-				<th>Etat</th>
-				<th>Prix</th>
-				<th></th>
-			</tr>
-		</thead>
-		<tbody>
-			{% for phone in phones %}
+		<table class="table">
+			<thead>
 				<tr>
-					<td>{{ phone.marque.name }}</td>
-					<td>{{ phone.modele.name }}</td>
-					<td>{{ phone.ram }}
-						Go</td>
-					<td>{{ phone.stockage }}
-						Go</td>
-					<td>{{ phone.etat }}</td>
-					<td>{{ phone.prix }}€</td>
-					<td>
-						<div class="row row-cols-auto">
-							<a class="col6 btn btn-primary btn-sm" href="{{ path('app_phone_show', {'id': phone.id}) }}">Créer une affiche</a>
-							<div class="col6">{{ include('phone/_delete_form.html.twig') }}</div>
-						</div>
-					</td>
+					<th>Marque</th>
+					<th>Modèle</th>
+					<th>Ram</th>
+					<th>Stockage</th>
+					<th>Etat</th>
+					<th>Prix</th>
+					<th></th>
 				</tr>
-			{% else %}
-				<tr>
-					<td colspan="6">Aucun téléphone en stock</td>
-				</tr>
-			{% endfor %}
-		</tbody>
-	</table>
+			</thead>
+			<tbody>
+				{% for phone in phones %}
+					<tr>
+						<td>{{ phone.marque.name }}</td>
+						<td>{{ phone.modele.name }}</td>
+						<td>{{ phone.ram }}
+							Go</td>
+						<td>{{ phone.stockage }}
+							Go</td>
+						<td>{{ phone.etat }}</td>
+						<td>{{ phone.prix }}€</td>
+						<td>
+							<div class="row row-cols-auto">
+								<a class="col6 btn btn-primary btn-sm" href="{{ path('app_phone_show', {'id': phone.id}) }}">Créer une affiche</a>
+								<div class="col6">{{ include('phone/_delete_form.html.twig') }}</div>
+							</div>
+						</td>
+					</tr>
+				{% else %}
+					<tr>
+						<td colspan="6">Aucun téléphone en stock</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
 
-	<a class="btn btn-primary" href="{{ path('app_home') }}">Ajouter un nouveau téléphone</a>
+		<a class="btn btn-primary" href="{{ path('app_home') }}">Ajouter un nouveau téléphone</a>
+	</main>
 {% endblock %}
