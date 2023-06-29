@@ -7,6 +7,7 @@ use App\Entity\Marque;
 use App\Form\PhoneType;
 use App\Repository\PhoneRepository;
 use App\Service\PriceManager;
+use DateTimeImmutable;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,18 +23,33 @@ class AddController extends AbstractController
         $phone = new Phone();
         $form = $this->createForm(PhoneType::class, $phone);
         $form->handleRequest($request);
+        $price = null;
+        $modele = null;
+        $marque = null;
+        $ficheTechnique = null;
+
 
         if ($form->isSubmitted() && $form->isValid()) {
             $price = $priceManager->getPrice($phone);
             if ($price !== '0') {
                 $phone->setPrix($price);
+                $now = new DateTimeImmutable();
+                $modele = $phone->getModele(); 
+                $marque = $modele->getMarque(); 
+                $ficheTechnique = $modele->getFicheTechnique(); 
+                $phone->setEntryDate($now);
                 $phoneRepository->save($phone, true);
                 $this->addFlash(
                     'success',
                     'Ce téléphone a été ajouté dans la base, son prix a été estimé à ' . $price . '€'
                 );
-                return $this->redirectToRoute('app_phone_index');
-            }
+                return $this->render('add/index.html.twig', [
+                    'form' => $form,
+                    'price' => $price,
+                    'modele' => $modele, 
+                    'marque' => $marque, 
+                    'ficheTechnique' => $ficheTechnique, 
+                ]);          }
             $this->addFlash(
                 'danger',
                 'Ce téléphone est déféctueux, il ne peut pas être vendu et ne sera donc pas ajouté à la base'

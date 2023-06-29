@@ -14,14 +14,6 @@ class Phone
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(inversedBy: 'phones')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Marque $marque = null;
-
-    #[ORM\ManyToOne(inversedBy: 'phones')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Modele $modele = null;
-
     #[ORM\Column(length: 255)]
     private ?string $ram = null;
 
@@ -40,33 +32,16 @@ class Phone
     #[ORM\Column(type: Types::DATETIMETZ_IMMUTABLE, nullable: true)]
     private ?\DateTimeImmutable $exitDate = null;
 
+    #[ORM\ManyToOne(inversedBy: 'phone')]
+    private ?Marque $marque = null;
+
+    #[ORM\ManyToOne(inversedBy: 'phone')]
+    private ?Modele $modele = null;
+
+
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getMarque(): ?Marque
-    {
-        return $this->marque;
-    }
-
-    public function setMarque(?Marque $marque): self
-    {
-        $this->marque = $marque;
-
-        return $this;
-    }
-
-    public function getModele(): ?Modele
-    {
-        return $this->modele;
-    }
-
-    public function setModele(?Modele $modele): self
-    {
-        $this->modele = $modele;
-
-        return $this;
     }
 
     public function getRam(): ?string
@@ -137,6 +112,30 @@ class Phone
     public function setExitDate(?\DateTimeImmutable $exitDate): self
     {
         $this->exitDate = $exitDate;
+
+        return $this;
+    }
+
+    public function getMarque(): ?Marque
+    {
+        return $this->marque;
+    }
+
+    public function setMarque(?Marque $marque): self
+    {
+        $this->marque = $marque;
+
+        return $this;
+    }
+
+    public function getModele(): ?Modele
+    {
+        return $this->modele;
+    }
+
+    public function setModele(?Modele $modele): self
+    {
+        $this->modele = $modele;
 
         return $this;
     }
