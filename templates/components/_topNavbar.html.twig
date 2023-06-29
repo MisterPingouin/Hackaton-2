@@ -1,3 +1,6 @@
+{# liste des pages où la barre de recherche doit être affichée #}
+{% set pages_with_search = ['app_phone_index', 'app_phone_show'] %}
+
 <nav class="navbar navbar-expand-lg bg-primary shadow-lg sticky-top">
     <div class="container-fluid">
         <a class="navbar-brand" href="#"><img src="{{ asset('build/images/logo_noText.png')}}" alt="" id="nav-logo"></a>
@@ -5,6 +8,12 @@
             aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+        {% if app.request.get('_route') in pages_with_search %}
+            <form class="d-flex" action="{{ path('app_phone_search') }}">
+                <input class="form-control me-2" type="search" name="query" placeholder="Rechercher" aria-label="Search">
+                <button class="btn btn-outline-light" type="submit">Rechercher</button>
+            </form>
+        {% endif %}
         <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
             <div class="navbar-nav">
                 <a class="nav-link text-white active" href="{{ path('app_home')}}">Home</a>
@@ -15,7 +24,8 @@
                 <a href="{{ path('register') }}" class="nav-link text-white"> S'inscrire</a>
                 {% endif %}
                 <a class="nav-link text-white" href="{{ path('forum_index') }}">Forum</a>
-                <a class="nav-link text-white" href="#">Calculatrice</a>
+                <a class="nav-link text-white" href="{{ path('app_add_phone')}}">Ajouter</a>
+                <a class="nav-link text-white" href="{{ path('app_phone_index')}}">Stock</a>
             </div>
         </div>
     </div>

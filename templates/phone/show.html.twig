@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détail du téléphone{% endblock %}
+
+{% block body %}
+    <h1>Détail du téléphone</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Marque</th>
+                <td>{{ phone.marque.name }}</td>
+            </tr>
+            <tr>
+                <th>Modèle</th>
+                <td>{{ phone.modele.name }}</td>
+            </tr>
+            <tr>
+                <th>Ram</th>
+                <td>{{ phone.ram }} Go</td>
+            </tr>
+            <tr>
+                <th>Stockage</th>
+                <td>{{ phone.stockage }} Go</td>
+            </tr>
+            <tr>
+                <th>Etat</th>
+                <td>{{ phone.etat }}</td>
+            </tr>
+            <tr>
+                <th>Prix</th>
+                <td>{{ phone.prix }}€</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a class="btn btn-primary" href="{{ path('app_phone_index') }}">Retour à la liste</a>
+{% endblock %}

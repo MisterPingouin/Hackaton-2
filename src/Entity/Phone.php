@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\PhoneRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: PhoneRepository::class)]
@@ -32,6 +33,12 @@ class Phone
 
     #[ORM\Column(length: 7)]
     private ?string $prix = null;
+
+    #[ORM\Column(type: Types::DATETIMETZ_IMMUTABLE)]
+    private ?\DateTimeImmutable $entryDate = null;
+
+    #[ORM\Column(type: Types::DATETIMETZ_IMMUTABLE, nullable: true)]
+    private ?\DateTimeImmutable $exitDate = null;
 
     public function getId(): ?int
     {
@@ -106,6 +113,30 @@ class Phone
     public function setPrix(string $prix): self
     {
         $this->prix = $prix;
+
+        return $this;
+    }
+
+    public function getEntryDate(): ?\DateTimeImmutable
+    {
+        return $this->entryDate;
+    }
+
+    public function setEntryDate(\DateTimeImmutable $entryDate): self
+    {
+        $this->entryDate = $entryDate;
+
+        return $this;
+    }
+
+    public function getExitDate(): ?\DateTimeImmutable
+    {
+        return $this->exitDate;
+    }
+
+    public function setExitDate(?\DateTimeImmutable $exitDate): self
+    {
+        $this->exitDate = $exitDate;
 
         return $this;
     }

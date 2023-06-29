@@ -2,55 +2,9 @@
 
 {% block title %}Home
 {% endblock %}
-{% block javascripts %}
-	{{ parent() }}
-	{{ encore_entry_script_tags('showChoice') }}
-		{% if app.user %}
- <script src="https://cdn.botpress.cloud/webchat/v0/inject.js"></script>
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-  window.botpressWebChat.init({
-      "botId": "bda36578-85a1-4fed-8f01-dc880a58e0c8",
-      "hostUrl": "https://cdn.botpress.cloud/webchat/v0",
-      "messagingUrl": "https://messaging.botpress.cloud",
-      "clientId": "bda36578-85a1-4fed-8f01-dc880a58e0c8",
-      "botName": "Emmaus Connect Bot",
-      "avatarUrl": "https://emmaus-connect.org/logo.svg",
-"stylesheet": "https://cdn.jsdelivr.net/gh/MisterPingouin/Hackaton-2@02001ed69617597011fa2cd081ba3fcde4036348/assets/styles/botpress.css"
-});
-});
-</script>
-	{% endif %}
-{% endblock %}
+
 {% block body %}
 
-{% if app.user %}
-<div class="col-xl-6">
 
-    {{ form_start(form) }}
-    <div id="choice-marque">
-        {{ form_row(form.marque) }}
-    </div>
-
-    <div id="choice-modele" class="d-none">
-        {{ form_row(form.modele) }}
-    </div>
-
-    <div id="choice-ram" class="d-none">
-        {{form_row(form.ram)}}
-    </div>
-
-    <div id="choice-stockage" class="d-none">
-        {{ form_row(form.stockage) }}
-    </div>
-
-    <div id="choice-etat" class="d-none">
-        {{form_row(form.etat)}}
-    </div>
-
-    <button id="choice-btn" class="d-none btn btn-primary">{{ button|default('Envoyer') }}</button>
-    {{ form_end(form) }}
-</div>
-{% endif %}
 {% endblock %}
 
