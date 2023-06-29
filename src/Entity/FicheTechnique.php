@@ -29,7 +29,7 @@ class FicheTechnique
     private ?string $poids = null;
 
     #[ORM\OneToOne(inversedBy: 'ficheTechnique', cascade: ['persist', 'remove'])]
-    private ?modele $modele = null;
+    private ?Modele $modele = null;
 
     public function getId(): ?int
     {
@@ -96,12 +96,12 @@ class FicheTechnique
         return $this;
     }
 
-    public function getModele(): ?modele
+    public function getModele(): ?Modele
     {
         return $this->modele;
     }
 
-    public function setModele(?modele $modele): self
+    public function setModele(?Modele $modele): self
     {
         $this->modele = $modele;
 

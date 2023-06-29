@@ -18,16 +18,16 @@ class Marque
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
+    #[ORM\OneToMany(mappedBy: 'marque', targetEntity: Phone::class)]
+    private Collection $phone;
+
     #[ORM\OneToMany(mappedBy: 'marque', targetEntity: Modele::class)]
     private Collection $modeles;
 
-    #[ORM\OneToMany(mappedBy: 'marque', targetEntity: Phone::class, orphanRemoval: true)]
-    private Collection $phones;
-
     public function __construct()
     {
+        $this->phone = new ArrayCollection();
         $this->modeles = new ArrayCollection();
-        $this->phones = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -43,6 +43,36 @@ class Marque
     public function setName(string $name): self
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Phone>
+     */
+    public function getPhone(): Collection
+    {
+        return $this->phone;
+    }
+
+    public function addPhone(Phone $phone): self
+    {
+        if (!$this->phone->contains($phone)) {
+            $this->phone->add($phone);
+            $phone->setMarque($this);
+        }
+
+        return $this;
+    }
+
+    public function removePhone(Phone $phone): self
+    {
+        if ($this->phone->removeElement($phone)) {
+            // set the owning side to null (unless already changed)
+            if ($phone->getMarque() === $this) {
+                $phone->setMarque(null);
+            }
+        }
 
         return $this;
     }
@@ -71,36 +101,6 @@ class Marque
             // set the owning side to null (unless already changed)
             if ($modele->getMarque() === $this) {
                 $modele->setMarque(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Phone>
-     */
-    public function getPhones(): Collection
-    {
-        return $this->phones;
-    }
-
-    public function addPhone(Phone $phone): self
-    {
-        if (!$this->phones->contains($phone)) {
-            $this->phones->add($phone);
-            $phone->setMarque($this);
-        }
-
-        return $this;
-    }
-
-    public function removePhone(Phone $phone): self
-    {
-        if ($this->phones->removeElement($phone)) {
-            // set the owning side to null (unless already changed)
-            if ($phone->getMarque() === $this) {
-                $phone->setMarque(null);
             }
         }
 
