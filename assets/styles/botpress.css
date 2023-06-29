@@ -104,9 +104,16 @@
     border-radius: 15px; 
 }
 
+
+.bpw-layout {
+    height: 60vh; /* Adjust this to control the height of the chatbot */
+    /* Other properties */
+}
+
 /* 
 .bpw-floating-button {
 
     background-image: url(YOUR_URL);
 
 } */
+

@@ -22,26 +22,33 @@ class HomeController extends AbstractController
         $phone = new Phone();
         $form = $this->createForm(PhoneType::class, $phone);
         $form->handleRequest($request);
+        $price = null;
+        $modele = null;
+        $marque = null;
+        $ficheTechnique = null;
+        $isDefective = false;
 
         if ($form->isSubmitted() && $form->isValid()) {
             $price = $priceManager->getPrice($phone);
+            $modele = $phone->getModele(); 
+            $marque = $modele->getMarque(); 
+            $ficheTechnique = $modele->getFicheTechnique(); 
+        
             if ($price !== '0') {
                 $phone->setPrix($price);
                 $phoneRepository->save($phone, true);
-                $this->addFlash(
-                    'success',
-                    'Ce téléphone a été ajouté dans la base, son prix a été estimé à ' . $price . '€'
-                );
-                return $this->redirectToRoute('app_home');
+            } else {
+                $isDefective = true;
             }
-            $this->addFlash(
-                'danger',
-                'Ce téléphone est déféctueux, il ne peut pas être vendu et ne sera donc pas ajouté à la base'
-            );
         }
-
+        
         return $this->render('home/index.html.twig', [
             'form' => $form,
+            'price' => $price,
+            'modele' => $modele, 
+            'marque' => $marque, 
+            'isDefective' => $isDefective,
+            'ficheTechnique' => $ficheTechnique, 
         ]);
     }
 
