@@ -3,28 +3,30 @@
 {% block title %}Discussion{% endblock %}
 
 {% block body %}
-<h1>Discussion</h1>
+<main class="container">
+    <h1 class="text-center my-2">{{ discussion.Title }}</h1>
+    <h3 class="text-center">
+        {% for category in discussion.category %}
+        {{category.name}} /
+        {% endfor %}
+    </h3>
+    <hr>
 
-<table class="table">
-    <tbody>
-        <tr>
-            <th>Id</th>
-            <td>{{ discussion.id }}</td>
-        </tr>
-        <tr>
-            <th>Title</th>
-            <td>{{ discussion.Title }}</td>
-        </tr>
-        <tr>
-            <th>Content</th>
-            <td>{{ discussion.content }}</td>
-        </tr>
-    </tbody>
-</table>
-
-<a href="{{ path('discussion_index') }}">back to list</a>
-
-<a href="{{ path('discussion_edit', {'id': discussion.id}) }}">edit</a>
-
-{{ include('discussion/_delete_form.html.twig') }}
+    {% if app.user.id is defined and app.user.id is same as discussion.author.id %}
+    <div class="d-flex justify-content-center">
+        <a href="{{ path('discussion_edit', {id:discussion.id}) }}" class="btn btn-secondary text-white">
+            Modifier l'idée</a>
+        <p>
+            {{ include('discussion/_delete_form.html.twig') }}
+        </p>
+    </div>
+    {% endif %}
+    <div class="card bg-primary border-secondary border-3 shadow-lg text-white m-3">
+        <h5 class="card-header">{{ discussion.author.firstname }} {{ discussion.author.lastname }}</h5>
+        <div class="card-body">
+            <p>{{ discussion.content|striptags|u.truncate(100, '...', true) |raw }}</p>
+        </div>
+    </div>
+    <a href="{{ path('forum_index') }} " class="btn btn-secondary m-0 shadow-lg text-white">back to list</a>
+</main>
 {% endblock %}
