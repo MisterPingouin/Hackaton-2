@@ -45,11 +45,11 @@ document.getElementById('phone_marque').addEventListener('click', function() {
 document.addEventListener("DOMContentLoaded", function() {
     // Fonction pour ajouter l'animation d'entrée depuis la gauche aux champs du formulaire
     function animateFormField(fieldId) {
-      var field = document.getElementById(fieldId);
-      field.addEventListener('animationend', function() {
-        field.classList.remove('slide-in-left');
-        field.style.animation = '';
-      });
+        var field = document.getElementById(fieldId);
+        field.addEventListener('animationend', function() {
+            field.classList.remove('slide-in-left');
+            field.style.animation = '';
+        });
     }
   
     // Appel de la fonction pour chaque champ du formulaire
@@ -58,5 +58,5 @@ document.addEventListener("DOMContentLoaded", function() {
     animateFormField('choice-ram');
     animateFormField('choice-stockage');
     animateFormField('choice-etat');
-  });
+});
   
