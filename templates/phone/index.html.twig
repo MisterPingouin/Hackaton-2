@@ -4,116 +4,199 @@
 {% endblock %}
 
 {% block body %}
-	<main class="main-page" aria-label="phone-index">
+<main class="main-page" aria-label="phone-index">
 
-		<section class="container mt-5 d-none d-md-block">
-			<h1>Etat du stock:</h1>
-			<table class="table">
-				<thead>
-					<tr>
-						<th>Marque</th>
-						<th>Modèle</th>
-						<th>Ram</th>
-						<th>Stockage</th>
-						<th>Etat</th>
-						<th>Prix</th>
-						<th>Mis en vente le</th>
-						{% if is_granted('ROLE_ADMIN') %}
-							<th>Vendu le</th>
-						{% endif %}
-						<th></th>
-					</tr>
-				</thead>
-				<tbody>
-					{% for phone in phones %}
-						{% if is_granted('ROLE_USER') and not is_granted('ROLE_ADMIN') and not phone.isSold %}
-							<tr>
-								<td>{{ phone.marque.name }}</td>
-								<td>{{ phone.modele.name }}</td>
-								<td>{{ phone.ram }}
-									Go</td>
-								<td>{{ phone.stockage }}
-									Go</td>
-								<td>{{ phone.etat }}/10</td>
-								<td>{{ phone.prix }}€</td>
-								<td>{{ phone.entryDate|date("d/m/Y") }}</td>
-								<td>
-									<div class="row row-cols-auto justify-content-center">
-										<button type="button" class="me-2 btn btn-primary rounded rounded-pill fw-bold text-light px-3 my-lg-auto my-1" data-bs-toggle="modal" data-bs-target="#staticBackdrop{{phone.id}}">
-											Marquer comme vendu
-										</button>
-										<div class="modal fade" id="staticBackdrop{{phone.id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel{{phone.id}}" aria-hidden="true">
-											<div class="modal-dialog">
-												<div class="modal-content">
-													<div class="modal-header">
-														<h1 class="modal-title fs-5" id="staticBackdropLabel{{phone.id}}">
-															Téléphone Vendu
-														</h1>
-														<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-													</div>
-													<div class="modal-body">
-														<form action="{{ path('app_phone_sold', {'id': phone.id}) }}" name="user" method="GET" enctype="multipart/form-data" class="m-2">
-															<div class="mb-3 form-check">
-																<label class="form-check-label" for="isSold">Je confirme que ce téléphone
-																	{{phone.marque.name}}
-																	{{phone.modele.name}}
-																	à bien été vendu</label>
-																<input type="checkbox" class="form-check-input" name="isSold">
-															</div>
-															<button type="submit" class="btn btn-primary text-white">Confirmer</button>
-														</form>
-													</div>
-												</div>
-											</div>
-										</div>
-										<a class="btn btn-primary rounded rounded-pill fw-bold text-light px-3 my-lg-auto my-1" href="{{ path('app_phone_show', {'id': phone.id}) }}">Créer une affiche</a>
-									</div>
-								</td>
-							</tr>
-						{% endif %}
+    <section class="container-lg text-center my-4 d-md-none d-block">
+        <a class="btn btn-secondary rounded rounded-pill px-4 fw-bold text-light mx-auto"
+            href="{{ path('app_home') }}">Ajouter un nouveau téléphone</a>
+    </section>
 
-						{% if is_granted('ROLE_ADMIN') %}
-							<tr>
-								<td>{{ phone.marque.name }}</td>
-								<td>{{ phone.modele.name }}</td>
-								<td>{{ phone.ram }}
-									Go</td>
-								<td>{{ phone.stockage }}
-									Go</td>
-								<td>{{ phone.etat }}/10</td>
-								<td>{{ phone.prix }}€</td>
-								<td>{{ phone.entryDate|date("d/m/Y") }}</td>
-								{% if phone.exitDate %}
-									<td>{{ phone.exitDate|date("d/m/Y") }}</td>
-								{% else %}
-									<td>En stock</td>
-								{% endif %}
-								<td>
-									<div class="row row-cols-auto justify-content-center">
-                                        <div class="my-auto">{{ include('phone/_delete_form.html.twig') }}</div>
-										{% if phone.isSold %}
-											<p class="btn btn-warning rounded rounded-pill fw-bold text-light px-3 my-lg-auto my-1">Vendu</p>
-										{% endif %}
-										{% if not phone.isSold %}
-											<a class="btn btn-primary rounded rounded-pill fw-bold text-light px-3 my-lg-auto my-1" href="{{ path('app_phone_show', {'id': phone.id}) }}">Créer une affiche</a>
-										{% endif %}
-									</div>
-								</td>
-							</tr>
-						{% endif %}
-					{% else %}
-						<tr>
-							<td colspan="6">Aucun téléphone en stock</td>
-						</tr>
-					{% endfor %}
-				</tbody>
-			</table>
-		</section>
+    <section class="container mt-3 d-md-none d-block">
 
-		<section class="container-lg text-center my-4">
-			<a class="btn btn-secondary rounded rounded-pill px-4 fw-bold text-light mx-auto" href="{{ path('app_add_phone') }}">Ajouter un nouveau téléphone</a>
-		</section>
+        {% for phone in phones %}
+
+        <article class="border border-primary border-2 rounded-4 my-1 py-2 px-2">
+            <div>
+                <span>
+                    <strong>Marque:</strong>
+                </span>
+                <span>
+                    {{ phone.marque.name }}
+                </span>
+            </div>
+            <div>
+                <span>
+                    <strong>Modèle:</strong>
+                </span>
+                <span>
+                    {{ phone.modele.name }}
+                </span>
+            </div>
+            <div>
+                <span>
+                    <strong>RAM:</strong>
+                </span>
+                <span>
+                    {{ phone.ram }}
+                </span>
+            </div>
+            <div>
+                <span>
+                    <strong>Stockage:</strong>
+                </span>
+                <span>
+                    {{ phone.stockage }}
+                </span>
+            </div>
+            <div>
+                <span>
+                    <strong>Etat:</strong>
+                </span>
+                <span>
+                    {{ phone.etat }}
+                </span>
+            </div>
+            <div>
+                <span>
+                    <strong>Prix:</strong>
+                </span>
+                <span>
+                    {{ phone.prix }}
+                </span>
+            </div>
+            <div>
+                <div class="row row-cols-auto justify-content-center">
+                    <a class="btn btn-primary rounded rounded-pill fw-bold btn-sm text-light px-3 my-lg-auto my-1"
+                        href="{{ path('app_phone_show', {'id': phone.id}) }}">Créer une affiche</a>
+                    <div class="my-auto">{{ include('phone/_delete_form.html.twig') }}</div>
+                </div>
+            </div>
+        </article>
+
+        {% endfor %}
+
+    </section>
+
+    <section class="container mt-5 d-none d-md-block">
+        <h1>Etat du stock:</h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Marque</th>
+                    <th>Modèle</th>
+                    <th>Ram</th>
+                    <th>Stockage</th>
+                    <th>Etat</th>
+                    <th>Prix</th>
+                    <th>Mis en vente le</th>
+                    {% if is_granted('ROLE_ADMIN') %}
+                    <th>Vendu le</th>
+                    {% endif %}
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for phone in phones %}
+                {% if is_granted('ROLE_USER') and not is_granted('ROLE_ADMIN') and not phone.isSold %}
+                <tr>
+                    <td>{{ phone.marque.name }}</td>
+                    <td>{{ phone.modele.name }}</td>
+                    <td>{{ phone.ram }}
+                        Go</td>
+                    <td>{{ phone.stockage }}
+                        Go</td>
+                    <td>{{ phone.etat }}/10</td>
+                    <td>{{ phone.prix }}€</td>
+                    <td>{{ phone.entryDate|date("d/m/Y") }}</td>
+                    <td>
+                        <div class="row row-cols-auto justify-content-center">
+                            <button type="button"
+                                class="me-2 btn btn-primary rounded rounded-pill fw-bold text-light px-3 my-lg-auto my-1"
+                                data-bs-toggle="modal" data-bs-target="#staticBackdrop{{phone.id}}">
+                                Marquer comme vendu
+                            </button>
+                            <div class="modal fade" id="staticBackdrop{{phone.id}}" data-bs-backdrop="static"
+                                data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel{{phone.id}}"
+                                aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="staticBackdropLabel{{phone.id}}">
+                                                Téléphone Vendu
+                                            </h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form action="{{ path('app_phone_sold', {'id': phone.id}) }}" name="user"
+                                                method="GET" enctype="multipart/form-data" class="m-2">
+                                                <div class="mb-3 form-check">
+                                                    <label class="form-check-label" for="isSold">Je confirme que ce
+                                                        téléphone
+                                                        {{phone.marque.name}}
+                                                        {{phone.modele.name}}
+                                                        à bien été vendu</label>
+                                                    <input type="checkbox" class="form-check-input" name="isSold">
+                                                </div>
+                                                <button type="submit"
+                                                    class="btn btn-primary text-white">Confirmer</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a class="btn btn-primary rounded rounded-pill fw-bold text-light px-3 my-lg-auto my-1"
+                                href="{{ path('app_phone_show', {'id': phone.id}) }}">Créer une affiche</a>
+                        </div>
+                    </td>
+                </tr>
+                {% endif %}
+
+                {% if is_granted('ROLE_ADMIN') %}
+                <tr>
+                    <td>{{ phone.marque.name }}</td>
+                    <td>{{ phone.modele.name }}</td>
+                    <td>{{ phone.ram }}
+                        Go</td>
+                    <td>{{ phone.stockage }}
+                        Go</td>
+                    <td>{{ phone.etat }}/10</td>
+                    <td>{{ phone.prix }}€</td>
+                    <td>{{ phone.entryDate|date("d/m/Y") }}</td>
+                    {% if phone.exitDate %}
+                    <td>{{ phone.exitDate|date("d/m/Y") }}</td>
+                    {% else %}
+                    <td>En stock</td>
+                    {% endif %}
+                    <td>
+                        <div class="row row-cols-auto justify-content-center">
+                            <div class="my-auto">{{ include('phone/_delete_form.html.twig') }}</div>
+                            {% if phone.isSold %}
+                            <p class="btn btn-warning rounded rounded-pill fw-bold text-light px-3 my-lg-auto my-1">
+                                Vendu</p>
+                            {% endif %}
+                            {% if not phone.isSold %}
+                            <a class="btn btn-primary rounded rounded-pill fw-bold text-light px-3 my-lg-auto my-1"
+                                href="{{ path('app_phone_show', {'id': phone.id}) }}">Créer une affiche</a>
+                            {% endif %}
+                        </div>
+                    </td>
+                </tr>
+                {% endif %}
+                {% else %}
+                <tr>
+                    <td colspan="6">Aucun téléphone en stock</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </section>
+
+    <section class="container-lg text-center my-4">
+        <a class="btn btn-secondary rounded rounded-pill px-4 fw-bold text-light mx-auto"
+            href="{{ path('app_home') }}">Ajouter un nouveau téléphone</a>
+    </section>
 
 
-	</main>
+</main>
 {% endblock %}
