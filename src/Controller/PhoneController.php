@@ -23,8 +23,12 @@ class PhoneController extends AbstractController
     #[Route('/{id}', name: 'app_phone_show', methods: ['GET'])]
     public function show(Phone $phone): Response
     {
+        $modele = $phone->getModele();
+        $ficheTechnique = $modele->getFicheTechnique();
+
         return $this->render('phone/show.html.twig', [
             'phone' => $phone,
+            'ficheTechnique' => $ficheTechnique,
         ]);
     }
 
