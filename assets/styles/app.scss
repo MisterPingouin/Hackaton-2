@@ -46,31 +46,37 @@ h2 {
     font-family: $font-family-title;
 }
 
-
 #nav-logo {
     width: 2rem;
 }
 
+#nav-links {
+    .nav-link {
+        font-family: $font-family-title;
+        font-weight: bold;
+    }
+}
+
 .navbar-brand-img {
-    width: 80px; 
-    height: auto; 
+    width: 80px;
+    height: auto;
 }
 
 .custom-tooltip {
     --bs-tooltip-bg: var(--bs-primary);
     padding: 20px;
-  }
-
-  .custom-tooltip .tooltip-arrow {
-    display: none;
 }
 
+.custom-tooltip .tooltip-arrow {
+    display: none;
+}
 
 @media print {
     body * {
         visibility: hidden;
     }
-    .printable, .printable * {
+    .printable,
+    .printable * {
         visibility: visible;
     }
     .printable {
@@ -85,19 +91,18 @@ h2 {
 
 .navbar-nav .nav-link:hover {
     opacity: 0.8;
-   
+
 }
 
 .slide-in-left {
     animation: slideInLeft 0.5s ease-in-out forwards;
   }
-  
+
   @keyframes slideInLeft {
     from {
-      transform: translateX(-100%);
+        transform: translateX(-100%);
     }
     to {
-      transform: translateX(0);
+        transform: translateX(0);
     }
   }
-  
