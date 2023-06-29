@@ -27,7 +27,7 @@
                         <td>{{ user.roles|join(', ') }}</td>
                         <td>
                             <a href="{{ path('user_edit', {'id': user.id}) }}" class="btn btn-primary">Modifier</a>
-                            <button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal{{ user.id }}">Supprimer</button>
+                            <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal{{ user.id }}">Supprimer</button>
 
                             <!-- Modal -->
                             <div class="modal fade" id="deleteModal{{ user.id }}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
@@ -35,15 +35,13 @@
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h5 class="modal-title" id="deleteModalLabel">Confirmation de suppression</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
                                             Voulez-vous vraiment supprimer l'utilisateur {{ user.email }} ?
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
                                             <form method="post" action="{{ path('user_delete', {'id': user.id}) }}">
                                                 <input type="hidden" name="_method" value="DELETE">
                                                 <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}">
@@ -59,4 +57,7 @@
             </tbody>
         </table>
     </div>
+
+    <script src="https://unpkg.com/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+    <script src="https://unpkg.com/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
 {% endblock %}
