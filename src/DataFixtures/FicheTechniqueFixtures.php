@@ -9,7 +9,7 @@ use Doctrine\Persistence\ObjectManager;
 
 class FicheTechniqueFixtures extends Fixture implements DependentFixtureInterface
 {
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager): void
     {
         // Iphone 11
         $ficheTechnique1 = new FicheTechnique();
@@ -120,6 +120,16 @@ class FicheTechniqueFixtures extends Fixture implements DependentFixtureInterfac
         $ficheTechnique11->setPoids('150 grammes');
         $ficheTechnique11->setModele($this->getReference('modele_Harry'));
         $manager->persist($ficheTechnique11);
+
+        // Iphone 13
+        $ficheTechnique12 = new FicheTechnique();
+        $ficheTechnique12->setScreenSize('6.1 pouces');
+        $ficheTechnique12->setProcesseur('A14 Bionic');
+        $ficheTechnique12->setBatterie('2815 mAh');
+        $ficheTechnique12->setPhoto('Double caméra arrière 12MP');
+        $ficheTechnique12->setPoids('164 grammes');
+        $ficheTechnique12->setModele($this->getReference('modele_IPhone_13'));
+        $manager->persist($ficheTechnique12);
 
         $manager->flush();
     }
