@@ -24,6 +24,9 @@ class Modele
     #[ORM\OneToMany(mappedBy: 'modele', targetEntity: Phone::class, orphanRemoval: true)]
     private Collection $phones;
 
+    #[ORM\OneToOne(mappedBy: 'modele', cascade: ['persist', 'remove'])]
+    private ?FicheTechnique $ficheTechnique = null;
+
     public function __construct()
     {
         $this->phones = new ArrayCollection();
@@ -84,6 +87,28 @@ class Modele
                 $phone->setModele(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getFicheTechnique(): ?FicheTechnique
+    {
+        return $this->ficheTechnique;
+    }
+
+    public function setFicheTechnique(?FicheTechnique $ficheTechnique): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($ficheTechnique === null && $this->ficheTechnique !== null) {
+            $this->ficheTechnique->setModele(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($ficheTechnique !== null && $ficheTechnique->getModele() !== $this) {
+            $ficheTechnique->setModele($this);
+        }
+
+        $this->ficheTechnique = $ficheTechnique;
 
         return $this;
     }
