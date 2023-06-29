@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Search Results
+{% endblock %}
+
+{% block body %}
+	<div class="container-fluid">
+		<div class="ms-2 text-secondary">
+			<div class="row mt-2">
+				<div class="col ms-2 text-secondary">
+					{% if phones|length %}
+						<h4>resultat de recherche pour "{{ query }}":</h4>
+						<span class="badge text-bg-primary">
+							{% if phones|length == 1 %}
+								{{ phones|length }}
+								téléphone
+							{% elseif phones|length > 1 %}
+								{{ phones|length }}
+								téléphones
+							{% endif %}
+						</span>
+					{% else %}
+						<p>Désolé, aucun résultat pour "{{ query }}".</p>
+						<a href="{{ path('app_phone_index') }}" class="btn btn-primary" style="float: left">Retour à la liste.</a>
+					{% endif %}
+				</div>
+			</div>
+		</div>
+		{% if phones|length %}
+			<table class="table table-hover sortable" style="font-size:80%; width: 100%; white-space: nowrap; table-layout: fixed;">
+				<thead>
+					<tr>
+						<th style="cursor: pointer;">Marque</th>
+						<th style="cursor: pointer;">Modèle</th>
+						<th style="cursor: pointer;">Ram</th>
+						<th style="cursor: pointer;">Stockage</th>
+						<th style="cursor: pointer;">Etat</th>
+						<th style="cursor: pointer;">Prix</th>
+						<th class="no-sort">actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for phone in phones %}
+						<td style="overflow: hidden; text-overflow: ellipsis">{{ phone.marque.name }}</td>
+						<td>{{ phone.modele.name }}</td>
+						<td>{{phone.ram}}</td>
+						<td>{{ phone.stockage }}</td>
+						<td data-sort="">{{ phone.etat }}</td>
+						<td>{{ phone.prix }}</td>
+						<td>
+							<a href="{{ path('app_phone_show', {'id': phone.id}) }}" class="btn btn-primary btn-sm">voir</a>
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	{% endif %}
+</div>{% endblock %}

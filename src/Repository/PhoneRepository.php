@@ -39,6 +39,28 @@ class PhoneRepository extends ServiceEntityRepository
         }
     }
 
+    /**
+     * @return Phone[]
+     */
+    public function findSearchQuery(string $query)
+    {
+        $qb = $this->createQueryBuilder('phone');
+        $qb
+            ->where(
+                $qb->expr()->andX(
+                    $qb->expr()->orX(
+                        $qb->expr()->like('phone.marque', ':query'),
+                        $qb->expr()->like('phone.modele', ':query'),
+                    )
+                )
+            )
+            ->setParameter('query', '%' . $query . '%');
+
+        return $qb
+            ->getQuery()
+            ->getResult();
+    }
+
 //    /**
 //     * @return Phone[] Returns an array of Phone objects
 //     */
