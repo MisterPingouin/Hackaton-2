@@ -10,6 +10,6 @@ const formFields = [marque, modele, ram, stockage, etat, bouton];
 for (let i = 0; i < formFields.length; i++) {
     formFields[i].addEventListener('change', function (event) {
         event.preventDefault();
-        formFields[i+1].classList.toggle('d-none')
+        formFields[i+1].classList.remove('d-none')
     })
 }
