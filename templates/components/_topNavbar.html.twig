@@ -8,8 +8,8 @@
 		</a>
 		{% if app.request.get('_route') in pages_with_search %}
 			<form class="d-flex" action="{{ path('app_phone_search') }}">
-				<input class="form-control me-2 rounded-pill" type="search" name="query" placeholder="Rechercher" aria-label="Search">
-				<button class="btn btn-outline-light rounded-pill align-middle" type="submit">
+				<input class="search-field form-control me-2 rounded-pill" type="search" name="query" placeholder="Rechercher" aria-label="Search">
+				<button class="search-field btn btn-outline-light rounded-pill align-middle" type="submit">
 					<i class="bi bi-search"></i>
 				</button>
 			</form>

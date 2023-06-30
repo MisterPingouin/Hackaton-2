@@ -107,3 +107,10 @@ h2 {
         transform: translateX(0);
     }
   }
+
+  @media (max-width: 991.98px) {
+    .search-field {
+      display: none;
+    }
+  }
+  
