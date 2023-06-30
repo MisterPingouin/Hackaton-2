@@ -40,7 +40,7 @@
     <a class="btn btn-primary text-white" href="{{ path('app_phone_index') }}">Retour à la liste</a>
 </div>
 
-{% if is_granted('ROLE_USER') and not is_granted('ROLE_ADMIN') and not phone.isSold %}
+{% if is_granted('ROLE_USER') and not phone.isSold %}
 <div class="d-flex justify-content-center mt-4">
     <button type="button" class="btn btn-primary text-white" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
         Le téléphone à été vendu ?
